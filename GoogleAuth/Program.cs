@@ -36,7 +36,7 @@ app.MapHub<PartidaHub>("/partida");
 
 app.UseHttpsRedirection();
 
-//app.UseAuthentication();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

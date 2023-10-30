@@ -15,15 +15,21 @@ public class UsuarioController : ControllerBase
 		_context = context;
 	}
 
+    //[HttpGet]
+    //public ActionResult<IEnumerable<Usuario>> Get()
+    //{
+    //    var usuarios = _context.Usuarios.ToList();
+    //    if (usuarios is null)
+    //    {
+    //        return Ok();
+    //    }
+    //    //return usuarios;
+    //    return Ok("Sucesso");
+    //}
     [HttpGet]
-    public ActionResult<IEnumerable<Usuario>> Get()
+    public IHttpActionResult GetStatus()
     {
-        var usuarios = _context.Usuarios.ToList();
-        if (usuarios is null)
-        {
-            return Ok();
-        }
-        //return usuarios;
+        // Simplesmente retorna uma resposta HTTP 200 OK com uma string "Sucesso".
         return Ok("Sucesso");
     }
 
