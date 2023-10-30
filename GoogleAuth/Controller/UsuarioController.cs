@@ -26,6 +26,7 @@ public class UsuarioController : ControllerBase
     //    //return usuarios;
     //    return Ok("Sucesso");
     //}
+    [HttpGet]
     public ActionResult Get()
     {
         return Content("Success");
