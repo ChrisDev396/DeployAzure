@@ -22,10 +22,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             //options.ValidateLifetime = true;
         });
 
-string mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseMySql(mySqlConnection,
-        ServerVersion.AutoDetect(mySqlConnection)));
+//string mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
+//builder.Services.AddDbContext<AppDbContext>(options =>
+//    options.UseMySql(mySqlConnection,
+//        ServerVersion.AutoDetect(mySqlConnection)));
 
 builder.Services.AddSignalR();
 
