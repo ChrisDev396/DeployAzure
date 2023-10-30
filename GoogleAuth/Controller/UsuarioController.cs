@@ -26,12 +26,11 @@ public class UsuarioController : ControllerBase
     //    //return usuarios;
     //    return Ok("Sucesso");
     //}
-    [HttpGet]
-    public IHttpActionResult GetStatus()
+    public ActionResult Get()
     {
-        // Simplesmente retorna uma resposta HTTP 200 OK com uma string "Sucesso".
-        return Ok("Sucesso");
+        return Content("Success");
     }
+
 
     [HttpGet("{id:int}", Name = "ObterUsuario")]
     public ActionResult<Usuario> Get(int id)
