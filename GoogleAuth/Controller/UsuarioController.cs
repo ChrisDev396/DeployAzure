@@ -18,19 +18,20 @@ public class UsuarioController : ControllerBase
     [HttpGet]
     public ActionResult<IEnumerable<Usuario>> Get()
     {
-        //var usuarios = _context.Usuarios.ToList();
-        //if (usuarios is null)
-        //{
-        //    return Ok();
-        //}
-        //return usuarios;
-        return Ok("Sucesso");
+        var usuarios = _context.Usuarios.ToList();
+        if (usuarios is null)
+        {
+            return Ok();
+        }
+        return usuarios;
+        //return Ok("Sucesso");
     }
-    //[HttpGet]
-    //public ActionResult Get()
-    //{
-    //    return Content("Success");
-    //}
+
+    [HttpGet("/teste")]
+    public ActionResult Get2()
+    {
+        return Content("Success");
+    }
 
 
     //[HttpGet("{id:int}", Name = "ObterUsuario")]
@@ -55,7 +56,7 @@ public class UsuarioController : ControllerBase
     //        var jwtToken = tokenHandler.ReadJwtToken(token);
 
     //        var emailClaim = jwtToken.Claims.FirstOrDefault(claim => claim.Type == "email");
-                        
+
 
     //        if (emailClaim != null)
     //        {
@@ -64,8 +65,8 @@ public class UsuarioController : ControllerBase
     //            {
     //                return BadRequest("Voce nao tem acesso a essa conta. "+usuario.Email); 
     //            }
-                
-               
+
+
     //        }
     //    }
     //    return usuario;
@@ -106,8 +107,8 @@ public class UsuarioController : ControllerBase
 
     //    usuario.Email = emailClaim;
     //    usuario.DataCriacao = DateTime.Now;
-        
-        
+
+
     //    _context.Usuarios.Add(usuario);
     //    _context.SaveChanges();
 
