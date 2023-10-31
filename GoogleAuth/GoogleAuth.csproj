@@ -31,4 +31,17 @@
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Migrations\AppDbContextModelSnapshot.cs" />
+    <Compile Remove="Migrations\20231026011431_GoogleAuthTeste2.Designer.cs" />
+    <Compile Remove="Migrations\20231026011431_GoogleAuthTeste2.cs" />
+    <Compile Remove="Migrations\20231025135311_GoogleAuthTeste.Designer.cs" />
+    <Compile Remove="Migrations\20231025135311_GoogleAuthTeste.cs" />
+    <Compile Remove="Migrations\20231031042649_NomeDaMigracao.cs" />
+    <Compile Remove="Migrations\20231031042649_NomeDaMigracao.Designer.cs" />
+    <Compile Remove="Migrations\20231031055829_NomeDaMigracao2.cs" />
+    <Compile Remove="Migrations\20231031055829_NomeDaMigracao2.Designer.cs" />
+    <Compile Remove="Migrations\20231031060044_NomeDaMigracao.cs" />
+    <Compile Remove="Migrations\20231031060044_NomeDaMigracao.Designer.cs" />
+  </ItemGroup>
 </Project>
