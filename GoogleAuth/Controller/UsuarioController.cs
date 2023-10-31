@@ -34,87 +34,87 @@ public class UsuarioController : ControllerBase
     }
 
 
-    //[HttpGet("{id:int}", Name = "ObterUsuario")]
-    //public ActionResult<Usuario> Get(int id)
-    //{
-    //    var usuario = _context.Usuarios.FirstOrDefault(p => p.UsuarioId == id);
-    //    if (usuario is null)
-    //    {
-    //        return NotFound("Usuário não encontrado.");
-    //    }
+    [HttpGet("{id:int}", Name = "ObterUsuario")]
+    public ActionResult<Usuario> Get(int id)
+    {
+        var usuario = _context.Usuarios.FirstOrDefault(p => p.UsuarioId == id);
+        if (usuario is null)
+        {
+            return NotFound("Usuário não encontrado.");
+        }
 
-    //    string token = HttpContext.Request.Headers["Authorization"].FirstOrDefault();
+        string token = HttpContext.Request.Headers["Authorization"].FirstOrDefault();
 
-    //    if (token != null)
-    //    {
-    //        if (token.StartsWith("Bearer "))
-    //        {
-    //            token = token.Substring("Bearer ".Length);
-    //        }
+        if (token != null)
+        {
+            if (token.StartsWith("Bearer "))
+            {
+                token = token.Substring("Bearer ".Length);
+            }
 
-    //        var tokenHandler = new JwtSecurityTokenHandler();
-    //        var jwtToken = tokenHandler.ReadJwtToken(token);
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var jwtToken = tokenHandler.ReadJwtToken(token);
 
-    //        var emailClaim = jwtToken.Claims.FirstOrDefault(claim => claim.Type == "email");
-
-
-    //        if (emailClaim != null)
-    //        {
-    //            string email = emailClaim.Value;
-    //            if (email != usuario.Email)
-    //            {
-    //                return BadRequest("Voce nao tem acesso a essa conta. "+usuario.Email); 
-    //            }
+            var emailClaim = jwtToken.Claims.FirstOrDefault(claim => claim.Type == "email");
 
 
-    //        }
-    //    }
-    //    return usuario;
-    //}
-
-    //[HttpPost]
-    //public ActionResult Post(Usuario usuario)
-    //{
-    //    if (usuario is null)
-    //    {
-    //        return BadRequest(usuario.UsuarioId);
-    //    }
-
-    //    if (_context.Usuarios.Any(u => u.Nome == usuario.Nome))
-    //    {
-    //        ModelState.AddModelError("Nome", "O nome de usuário já está em uso.");
-    //        return BadRequest(ModelState);
-    //    }
-
-    //    string token = HttpContext.Request.Headers["Authorization"].FirstOrDefault();
-
-    //    if (token.StartsWith("Bearer "))
-    //    {
-    //        token = token.Substring("Bearer ".Length);
-    //    }
-
-    //    var tokenHandler = new JwtSecurityTokenHandler();
-    //    var jwtToken = tokenHandler.ReadJwtToken(token);
-
-    //    var emailClaim = jwtToken.Claims.FirstOrDefault(claim => claim.Type == "email").Value;
-
-    //    if (_context.Usuarios.Any(u => u.Email == emailClaim))
-    //    {
-    //        ModelState.AddModelError("Email", "O email de usuário já está em uso.");
-    //        return BadRequest(ModelState);
-    //    }
+            if (emailClaim != null)
+            {
+                string email = emailClaim.Value;
+                if (email != usuario.Email)
+                {
+                    return BadRequest("Voce nao tem acesso a essa conta. " + usuario.Email);
+                }
 
 
-    //    usuario.Email = emailClaim;
-    //    usuario.DataCriacao = DateTime.Now;
+            }
+        }
+        return usuario;
+    }
+
+    [HttpPost]
+    public ActionResult Post(Usuario usuario)
+    {
+        if (usuario is null)
+        {
+            return BadRequest(usuario.UsuarioId);
+        }
+
+        if (_context.Usuarios.Any(u => u.Nome == usuario.Nome))
+        {
+            ModelState.AddModelError("Nome", "O nome de usuário já está em uso.");
+            return BadRequest(ModelState);
+        }
+
+        string token = HttpContext.Request.Headers["Authorization"].FirstOrDefault();
+
+        if (token.StartsWith("Bearer "))
+        {
+            token = token.Substring("Bearer ".Length);
+        }
+
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var jwtToken = tokenHandler.ReadJwtToken(token);
+
+        var emailClaim = jwtToken.Claims.FirstOrDefault(claim => claim.Type == "email").Value;
+
+        if (_context.Usuarios.Any(u => u.Email == emailClaim))
+        {
+            ModelState.AddModelError("Email", "O email de usuário já está em uso.");
+            return BadRequest(ModelState);
+        }
 
 
-    //    _context.Usuarios.Add(usuario);
-    //    _context.SaveChanges();
+        usuario.Email = emailClaim;
+        usuario.DataCriacao = DateTime.Now;
 
-    //    return new CreatedAtRouteResult("ObterUsuario",
-    //        new { id = usuario.UsuarioId }, usuario);
-    //}
+
+        _context.Usuarios.Add(usuario);
+        _context.SaveChanges();
+
+        return new CreatedAtRouteResult("ObterUsuario",
+            new { id = usuario.UsuarioId }, usuario);
+    }
 
 
 }
