@@ -6,9 +6,20 @@ public class PartidaHub : Hub
 {
     public async Task SendMessage(string user, string message)
     {
-        await Clients.All.SendAsync("SendMessage", user, message);
+
+        if (message == "salaCriada")
+        {
+            // await Clients.Client(user).SendAsync("SendMessage", user, message);
+            await Clients.All.SendAsync("SendMessage", user, message);
+        }
+        else
+        {
+
+        }
+        
     }
 }
+
 
 
 //public async IAsyncEnumerable<DateTime> Straming(CancellationToken cancellationToken)

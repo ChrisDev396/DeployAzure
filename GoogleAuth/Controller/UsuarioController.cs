@@ -8,29 +8,29 @@ using Microsoft.AspNetCore.Mvc;
 //[Authorize]
 public class UsuarioController : ControllerBase
 {
-	//private readonly AppDbContext _context;
+    private readonly AppDbContext _context;
 
-	//public UsuarioController(AppDbContext context)
-	//{
-		//_context = context;
-	//}
-
-    //[HttpGet]
-    //public ActionResult<IEnumerable<Usuario>> Get()
-    //{
-    //    var usuarios = _context.Usuarios.ToList();
-    //    if (usuarios is null)
-    //    {
-    //        return Ok();
-    //    }
-    //    //return usuarios;
-    //    return Ok("Sucesso");
-    //}
-    [HttpGet]
-    public ActionResult Get()
+    public UsuarioController(AppDbContext context)
     {
-        return Content("Success");
+        _context = context;
     }
+
+    [HttpGet]
+    public ActionResult<IEnumerable<Usuario>> Get()
+    {
+        var usuarios = _context.Usuarios.ToList();
+        if (usuarios is null)
+        {
+            return Ok();
+        }
+        //return usuarios;
+        return Ok("Sucesso");
+    }
+    //[HttpGet]
+    //public ActionResult Get()
+    //{
+    //    return Content("Success");
+    //}
 
 
     //[HttpGet("{id:int}", Name = "ObterUsuario")]
