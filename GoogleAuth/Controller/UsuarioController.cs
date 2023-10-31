@@ -27,10 +27,10 @@ public class UsuarioController : ControllerBase
         //return Ok("Sucesso");
     }
 
-    [HttpGet("/teste")]
+    [HttpGet("{id:int}")]
     public ActionResult Get2()
     {
-        return Content("Success");
+        return Ok("Success");
     }
 
 
