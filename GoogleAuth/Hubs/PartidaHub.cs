@@ -1,21 +1,21 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 
-//[Authorize]
+[Authorize]
 public class PartidaHub : Hub
 {
     public async Task SendMessage(string user, string message)
     {
 
-        if (message == "salaCriada")
-        {
+        //if (message == "salaCriada")
+        //{
             // await Clients.Client(user).SendAsync("SendMessage", user, message);
             await Clients.All.SendAsync("SendMessage", user, message);
-        }
-        else
-        {
+        //}
+        //else
+        //{
 
-        }
+        //}
         
     }
 }
