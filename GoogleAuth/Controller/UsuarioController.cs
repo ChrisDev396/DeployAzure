@@ -18,11 +18,11 @@ public class UsuarioController : ControllerBase
     [HttpGet]
     public ActionResult<IEnumerable<Usuario>> Get()
     {
-        var usuarios = _context.Usuarios.ToList();
-        if (usuarios is null)
-        {
-            return Ok();
-        }
+        //var usuarios = _context.Usuarios.ToList();
+        //if (usuarios is null)
+        //{
+        //    return Ok();
+        //}
         //return usuarios;
         return Ok("Sucesso");
     }
