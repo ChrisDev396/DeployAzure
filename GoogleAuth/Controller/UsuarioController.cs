@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("[controller]")]
-//[Authorize]
+[Authorize]
 public class UsuarioController : ControllerBase
 {
     private readonly AppDbContext _context;
