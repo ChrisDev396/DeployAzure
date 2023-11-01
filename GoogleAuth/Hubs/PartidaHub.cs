@@ -14,7 +14,7 @@ public class PartidaHub : Hub
         
         if (usersInRoom < maxUsersInRoom)
         {
-            await Groups.AddToGroupAsync(Context.ConnectionId, roomName);
+            //await Groups.AddToGroupAsync(Context.ConnectionId, roomName);
             usersInRoom++;
 
             // Informe ao usuário que eles entraram na sala.
@@ -23,7 +23,7 @@ public class PartidaHub : Hub
         else
         {
             // A sala está cheia. Você pode informar ao usuário ou tomar outra ação apropriada.
-            await Clients.Caller.SendAsync("RoomFull");
+            await Clients.Caller.SendAsync("RoomJoined", "Full");
         }
     }
 
