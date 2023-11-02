@@ -9,14 +9,11 @@ public class PartidaHub : Hub
 
     public async Task JoinRoom(string roomName)//roomName
     {
-        //await Clients.Client(user).SendAsync("SendMessage", user, message);
-        //await Clients.All.SendAsync("SendMessage", user, message);
-        
         if (usersInRoom < maxUsersInRoom)
         {
             //await Groups.AddToGroupAsync(Context.ConnectionId, roomName);
             usersInRoom++;
-
+            roomName += roomName;
             // Informe ao usuário que eles entraram na sala.
             await Clients.Caller.SendAsync("RoomJoined", roomName);
         }
