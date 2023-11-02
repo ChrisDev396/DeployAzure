@@ -13,7 +13,7 @@ public class PartidaHub : Hub
         {
             //await Groups.AddToGroupAsync(Context.ConnectionId, roomName);
             usersInRoom++;
-            //roomName += roomName;
+            roomName += roomName;
             // Informe ao usuário que eles entraram na sala.
             await Clients.Caller.SendAsync("RoomJoined", roomName);
         }
@@ -33,9 +33,9 @@ public class PartidaHub : Hub
       
             usersInRoom++;
             roomName += roomName;
-            await Groups.AddToGroupAsync(Context.ConnectionId, roomName);
+            //await Groups.AddToGroupAsync(Context.ConnectionId, roomName);
             // Informe ao usuário que eles entraram na sala.
-            //await Clients.Caller.SendAsync("RoomJoined", roomName);
+            await Clients.Caller.SendAsync("RoomJoined", roomName);
         }
         else
         {
