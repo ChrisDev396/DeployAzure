@@ -20,6 +20,31 @@ public class PartidaHub : Hub
         else
         {
             usersInRoom++;
+            if (usersInRoom > 2)
+            {
+                usersInRoom = 2;
+            }
+            // A sala está cheia. Você pode informar ao usuário ou tomar outra ação apropriada.
+            await Clients.Caller.SendAsync("RoomJoined", usersInRoom.ToString());
+        }
+
+        
+    }
+
+    public async Task Sala(string roomName)//chris@gmail.comteste@gmail.com
+    {
+        if (usersInRoom < maxUsersInRoom)
+        {
+      
+            usersInRoom++;
+            roomName += roomName;
+            await Groups.AddToGroupAsync(Context.ConnectionId, roomName);
+            // Informe ao usuário que eles entraram na sala.
+            //await Clients.Caller.SendAsync("RoomJoined", roomName);
+        }
+        else
+        {
+            usersInRoom++;
             // A sala está cheia. Você pode informar ao usuário ou tomar outra ação apropriada.
             await Clients.Caller.SendAsync("RoomJoined", usersInRoom.ToString());
         }
