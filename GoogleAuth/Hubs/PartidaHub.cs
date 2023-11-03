@@ -18,7 +18,7 @@ public class PartidaHub : Hub
         if (usersInRoom < maxUsersInRoom)
         {
             //await Groups.AddToGroupAsync(Context.ConnectionId, roomName);
-            await Clients.Others.SendAsync("JoinRoom", usersInRoom.ToString());
+            await Clients.Others.SendAsync("JoinRoom", roomName);
             usersInRoom++;
         }
         else
