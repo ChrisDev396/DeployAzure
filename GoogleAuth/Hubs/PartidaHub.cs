@@ -10,12 +10,6 @@ public class PartidaHub : Hub
 
     public async Task JoinRoom(string roomName)//roomName
     {
-        if (usersInRoom == maxUsersInRoom)
-        {
-            sala = "";
-            usersInRoom = 0;
-        }
-
         if (usersInRoom < maxUsersInRoom)
         {
             //await Groups.AddToGroupAsync(Context.ConnectionId, roomName);
@@ -25,8 +19,9 @@ public class PartidaHub : Hub
         }
         else
         {
-            // A sala está cheia. Você pode informar ao usuário ou tomar outra ação apropriada.
-            await Clients.Caller.SendAsync("RoomJoined", usersInRoom.ToString());
+            sala = "";
+            usersInRoom = 0;
+            await Clients.Caller.SendAsync("RoomJoined", sala);
         }
     }
 
@@ -37,11 +32,11 @@ public class PartidaHub : Hub
 
     public override async Task OnDisconnectedAsync(Exception exception)
     {
-        // Ao desconectar, reduza o contador de usuários na sala.
-        usersInRoom--;
+        sala = "";
+        usersInRoom = 0;
 
         await base.OnDisconnectedAsync(exception);
     }
-        
-    
+
+
 }
