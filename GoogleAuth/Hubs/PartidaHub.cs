@@ -9,9 +9,16 @@ public class PartidaHub : Hub
 
     public async Task JoinRoom(string roomName)//roomName
     {
+        //if (usersInRoom == maxUsersInRoom)
+        //{
+        //    usersInRoom = 0;
+        //    roomName = "";
+        //}
+        
         if (usersInRoom < maxUsersInRoom)
         {
-            await Groups.AddToGroupAsync(Context.ConnectionId, roomName);
+            //await Groups.AddToGroupAsync(Context.ConnectionId, roomName);
+            await Clients.Others.SendAsync("JoinRoom", usersInRoom.ToString());
             usersInRoom++;
         }
         else
