@@ -6,20 +6,22 @@ public class PartidaHub : Hub
 {
     private static int maxUsersInRoom = 2;
     private static int usersInRoom = 0;
+    private static string sala = "";
 
     public async Task JoinRoom(string roomName)//roomName
     {
-        //if (usersInRoom == maxUsersInRoom)
-        //{
-        //    usersInRoom = 0;
-        //    roomName = "";
-        //}
-        
+        if (usersInRoom == maxUsersInRoom)
+        {
+            sala = "";
+            usersInRoom = 0;
+        }
+
         if (usersInRoom < maxUsersInRoom)
         {
             //await Groups.AddToGroupAsync(Context.ConnectionId, roomName);
-            await Clients.All.SendAsync("JoinRoom", roomName);
+            sala += roomName;
             usersInRoom++;
+            await Clients.All.SendAsync("JoinRoom", sala);
         }
         else
         {
