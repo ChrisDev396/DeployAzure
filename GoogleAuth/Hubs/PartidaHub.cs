@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
+using Newtonsoft.Json.Linq;
 
 [Authorize]
 public class PartidaHub : Hub
@@ -8,12 +11,21 @@ public class PartidaHub : Hub
     private static int usersInRoom = 0;
     private static string sala = "";
 
-    public async Task JoinRoom(string roomName)//roomName
+    public async Task JoinRoom()
     {
         if (usersInRoom < maxUsersInRoom)
         {
+            var claims = Context.User.Claims;
+
+            var emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email);
+
+            if (emailClaim != null)
+            {
+                string email = emailClaim.Value;
+                sala += email;
+            }
             //await Groups.AddToGroupAsync(Context.ConnectionId, roomName);
-            sala += roomName;
+            
             usersInRoom++;
             await Clients.All.SendAsync("JoinRoom", sala);
         }
@@ -21,7 +33,7 @@ public class PartidaHub : Hub
         {
             sala = "";
             usersInRoom = 0;
-            await Clients.Caller.SendAsync("RoomJoined", sala);
+            await Clients.Caller.SendAsync("JoinRoom", sala);
         }
     }
 
