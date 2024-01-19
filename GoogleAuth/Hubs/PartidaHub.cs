@@ -13,39 +13,50 @@ public class PartidaHub : Hub
 
     public async Task JoinRoom()
     {
+        var claims = Context.User.Claims;
+
+        var emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email);
+
         if (usersInRoom < maxUsersInRoom)
         {
-            var claims = Context.User.Claims;
-
-            var emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email);
+            if (emailClaim != null)
+            {
+                string email = emailClaim.Value;
+                sala += email;
+            }
+            if(emailClaim == emailClaim)
+            {
+                sala = "bloqueado";
+            }
+            //await Groups.AddToGroupAsync(Context.ConnectionId, roomName);
+            
+            usersInRoom++;
+            await Clients.All.SendAsync("JoinRoom", sala, usersInRoom);
+        }
+        else
+        {
+            sala = "";
 
             if (emailClaim != null)
             {
                 string email = emailClaim.Value;
                 sala += email;
             }
-            //await Groups.AddToGroupAsync(Context.ConnectionId, roomName);
-            
-            usersInRoom++;
-            await Clients.All.SendAsync("JoinRoom", sala);
-        }
-        else
-        {
-            sala = "";
-            usersInRoom = 0;
+            usersInRoom = 1;
             await Clients.Caller.SendAsync("JoinRoom", sala);
         }
     }
 
-    public async Task SendMessageToRoom(string roomName, string user, string message)
+    public async Task SendMessageToRoom(string roomName, string user, Jogador jogador)
     {
-        await Clients.Group(roomName).SendAsync("ReceiveMessage", user, message);
+        
+        await Clients.Group(roomName).SendAsync("acao", user);
     }
 
     public override async Task OnDisconnectedAsync(Exception exception)
     {
-        sala = "";
-        usersInRoom = 0;
+        //sala = "";
+        //usersInRoom = 0;
 
         await base.OnDisconnectedAsync(exception);
     }

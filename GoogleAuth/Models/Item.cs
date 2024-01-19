@@ -13,9 +13,10 @@ public class Item
     [Required]
     [Column(TypeName ="decimal(10,2)")]
 	public decimal Preco { get; set; }
-    //public string? ImagemUrl { get; set; }
 
-    public int UsuarioId { get; set; }
-	public Usuario? Usuario { get; set; }
+	//public bool Ativo { get; set; }
+
+ //   public int UsuarioId { get; set; }
+	//public Usuario? Usuario { get; set; }
 }
 

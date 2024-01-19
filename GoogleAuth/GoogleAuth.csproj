@@ -43,5 +43,6 @@
     <Compile Remove="Migrations\20231031055829_NomeDaMigracao2.Designer.cs" />
     <Compile Remove="Migrations\20231031060044_NomeDaMigracao.cs" />
     <Compile Remove="Migrations\20231031060044_NomeDaMigracao.Designer.cs" />
+    <Compile Remove="Models\Loja.cs" />
   </ItemGroup>
 </Project>

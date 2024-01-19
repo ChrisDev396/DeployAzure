@@ -14,8 +14,8 @@ public class Usuario
     //[Required]
     public int UsuarioId { get; set; }
 
-    //[Required]
-    [StringLength(50)]
+    [Required]
+    //[StringLength(50)]
     public string? Email { get; set; }
 
     [Required]
