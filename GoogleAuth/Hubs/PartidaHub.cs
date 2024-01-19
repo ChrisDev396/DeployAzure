@@ -45,7 +45,7 @@ public class PartidaHub : Hub
                 sala += email;
             }
             usersInRoom = 1;
-            await Clients.Caller.SendAsync("JoinRoom", sala);
+            await Clients.All.SendAsync("JoinRoom", sala);
         }
     }
 
