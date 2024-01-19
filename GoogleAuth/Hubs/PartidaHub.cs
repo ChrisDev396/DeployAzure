@@ -33,7 +33,6 @@ public class PartidaHub : Hub
             //await Groups.AddToGroupAsync(Context.ConnectionId, roomName);
             
             usersInRoom++;
-            await Clients.All.SendAsync("JoinRoom", sala, usersInRoom);
         }
         else
         {
@@ -45,8 +44,8 @@ public class PartidaHub : Hub
                 sala += email;
             }
             usersInRoom = 1;
-            await Clients.All.SendAsync("JoinRoom", sala);
         }
+        await Clients.All.SendAsync("JoinRoom", sala);
     }
 
     public async Task SendMessageToRoom(string roomName, string user, Jogador jogador)
