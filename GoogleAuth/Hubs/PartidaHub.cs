@@ -22,12 +22,14 @@ public class PartidaHub : Hub
             if (emailClaim != null)
             {
                 string email = emailClaim.Value;
+
+                if (emailClaim.Equals(sala))
+                {
+                    sala = "bloqueado";
+                }
                 sala += email;
             }
-            if(emailClaim == emailClaim)
-            {
-                sala = "bloqueado";
-            }
+      
             //await Groups.AddToGroupAsync(Context.ConnectionId, roomName);
             
             usersInRoom++;
