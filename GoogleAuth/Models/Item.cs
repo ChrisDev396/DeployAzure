@@ -16,7 +16,7 @@ public class Item
 
 	//public bool Ativo { get; set; }
 
- //   public int UsuarioId { get; set; }
-	//public Usuario? Usuario { get; set; }
+	public int UsuarioId { get; set; }
+	public Usuario? Usuario { get; set; }
 }
 
