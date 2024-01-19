@@ -23,10 +23,10 @@ public class PartidaHub : Hub
             {
                 string email = emailClaim.Value;
 
-                if (email.Equals(sala))
-                {
-                    sala = "bloqueado";
-                }
+                //if (email.Equals(sala))
+                //{
+                //    sala = "bloqueado";
+                //}
                 sala += email;
             }
       
