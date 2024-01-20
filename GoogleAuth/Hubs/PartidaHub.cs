@@ -34,21 +34,21 @@ public class PartidaHub : Hub
                 //    sala = "bloqueado";
                 //}
 
-                //if (usersInRoom < 2)
-                //{
-                //    usersInRoom++;
-                //    if (usersInRoom == 2)
-                //    {
-                //        salas.Add(sala);
-                //    }
-                //}
-                //else
-                //{
-                //    sala = "";
-                //    usersInRoom = 1;
-                //}
+                if (usersInRoom < 2)
+                {
+                    usersInRoom++;
+                    //    if (usersInRoom == 2)
+                    //    {
+                    //        salas.Add(sala);
+                    //    }
+                }
+                else
+                {
+                    sala = "";
+                    usersInRoom = 1;
+                }
 
-                //sala += emailClaim.Value + "baralho" + baralho + "/";
+                sala += emailClaim.Value + "baralho" + baralho + "/";
                 await Clients.Caller.SendAsync("JoinRoom", baralho);
 
             }
