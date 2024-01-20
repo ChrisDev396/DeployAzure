@@ -9,7 +9,6 @@ using Newtonsoft.Json.Linq;
 [Authorize]
 public class PartidaHub : Hub
 {
-    private static int maxUsersInRoom = 2;
     private static int usersInRoom = 0;
     private static string sala = "";
     private static SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
@@ -34,21 +33,22 @@ public class PartidaHub : Hub
                 //    sala = "bloqueado";
                 //}
 
-                usersInRoom++;
-                sala += email + "baralho" + baralho + "/";
-                if (usersInRoom == 2)
+                
+                if (usersInRoom < 2)
                 {
+                    usersInRoom++;
                     salas.Add(sala);
-                    usersInRoom = 0;
-                   
                 }
+                else
+                {
+                    sala = "";
+                    usersInRoom = 1;
+                }
+
+                sala += email + "baralho" + baralho + "/";
 
                 await Clients.All.SendAsync("JoinRoom", sala);
 
-                if(usersInRoom == 0)
-                {
-                    sala = "";
-                }
             }
             
             
