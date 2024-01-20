@@ -15,8 +15,6 @@ public class PartidaHub : Hub
     private static SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
     private static List<string> salas;
 
-    private static ConcurrentDictionary<string, string[]> jogador = new ConcurrentDictionary<string, string[]>();
-
     public async Task JoinRoom(string baralho)
     {
         await _semaphore.WaitAsync();
@@ -36,25 +34,21 @@ public class PartidaHub : Hub
                 //    sala = "bloqueado";
                 //}
 
-                if (usersInRoom < maxUsersInRoom)
+                usersInRoom++;
+                sala += email + "baralho" + baralho + "/";
+                if (usersInRoom == 2)
                 {
-                    usersInRoom++;
-                    sala += email + "baralho" + baralho + "/";
-                    if (usersInRoom == 2)
-                    {
-                        salas.Add(sala);
-                    }
-                }
-                else
-                {
-                    sala = "";
-
-                    sala += email + "baralho" + baralho + "/";
-
-                    usersInRoom = 1;
+                    salas.Add(sala);
+                    usersInRoom = 0;
+                   
                 }
 
                 await Clients.All.SendAsync("JoinRoom", sala);
+
+                if(usersInRoom == 0)
+                {
+                    sala = "";
+                }
             }
             
             
