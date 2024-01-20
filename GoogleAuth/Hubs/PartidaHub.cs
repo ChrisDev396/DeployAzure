@@ -34,7 +34,6 @@ public class PartidaHub : Hub
                 //    sala = "bloqueado";
                 //}
 
-
                 if (usersInRoom < 2)
                 {
                     usersInRoom++;
@@ -50,7 +49,7 @@ public class PartidaHub : Hub
                 }
 
                 sala += emailClaim.Value + "baralho" + baralho + "/";
-                await Clients.Caller.SendAsync("JoinRoom", sala);
+                await Clients.Client(Context.ConnectionId).SendAsync("JoinRoom", sala);
 
             }
 
