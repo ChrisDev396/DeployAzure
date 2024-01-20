@@ -46,7 +46,7 @@ public class PartidaHub : Hub
                 if (emailClaim != null)
                 {
                     string email = emailClaim.Value;
-                    sala += email + "/";
+                    sala += email + "baralho" + baralho + "/";
                 }
                 usersInRoom = 1;
             }
