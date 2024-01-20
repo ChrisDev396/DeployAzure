@@ -21,6 +21,7 @@ public class PartidaHub : Hub
 
         try
         {
+            Thread.Sleep(10000);
             var claims = Context.User.Claims;
             var emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email);
 
