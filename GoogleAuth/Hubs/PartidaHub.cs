@@ -1,4 +1,5 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+﻿using System.Collections.Concurrent;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Threading;
 using Microsoft.AspNetCore.Authorization;
@@ -12,16 +13,17 @@ public class PartidaHub : Hub
     private static int usersInRoom = 0;
     private static string sala = "";
     private static SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
-    //private static List<string> Salas = new List<string>();
+    private static List<string> salas;
 
+    private static ConcurrentDictionary<string, string[]> jogador = new ConcurrentDictionary<string, string[]>();
 
-    public async Task JoinRoom()
+    public async Task JoinRoom(string baralho)
     {
         await _semaphore.WaitAsync();
 
         try
         {
-            Thread.Sleep(10000);
+            //Thread.Sleep(10000);
             var claims = Context.User.Claims;
             var emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email);
 
@@ -31,7 +33,11 @@ public class PartidaHub : Hub
                 {
                     string email = emailClaim.Value;
                     usersInRoom++;
-                    sala += email + "/";
+                    sala += email + "baralho"+baralho+"/";
+                    if (usersInRoom == 2)
+                    {
+                        salas.Add(sala);
+                    }
                 }
             }
             else
