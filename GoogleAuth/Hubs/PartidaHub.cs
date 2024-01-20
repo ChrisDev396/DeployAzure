@@ -49,7 +49,7 @@ public class PartidaHub : Hub
                 }
 
                 sala += emailClaim.Value + "baralho" + baralho + "/";
-                await Clients.Caller.SendAsync("JoinRoom", baralho);
+                await Clients.Caller.SendAsync("JoinRoom", sala);
 
             }
 
