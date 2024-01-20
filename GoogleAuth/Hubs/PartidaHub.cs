@@ -24,34 +24,37 @@ public class PartidaHub : Hub
             var claims = Context.User.Claims;
             var emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email);
 
-            if (emailClaim != null)
+            if (emailClaim.Value != null)
             {
-                
 
-                
+                //string email = emailClaim.Value;
+
+                //if (email.Equals(sala))
+                //{
+                //    sala = "bloqueado";
+                //}
+
+
+                if (usersInRoom < 2)
+                {
+                    usersInRoom++;
+                    if (usersInRoom == 2)
+                    {
+                        salas.Add(sala);
+                    }
+                }
+                else
+                {
+                    sala = "";
+                    usersInRoom = 1;
+                }
+
+                sala += emailClaim.Value + "baralho" + baralho + "/";
+                await Clients.Caller.SendAsync("JoinRoom", sala);
 
             }
-            string email = emailClaim.Value;
 
-            //if (email.Equals(sala))
-            //{
-            //    sala = "bloqueado";
-            //}
-
-
-            if (usersInRoom < 2)
-            {
-                usersInRoom++;
-                //salas.Add(sala);
-            }
-            else
-            {
-                sala = "";
-                usersInRoom = 1;
-            }
-
-            sala += email + "baralho" + baralho + "/";
-            await Clients.All.SendAsync("JoinRoom", sala);
+            
         }
         finally
         {
