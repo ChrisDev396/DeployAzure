@@ -33,20 +33,15 @@ public class PartidaHub : Hub
             usersInRoom++;
 
             await Groups.AddToGroupAsync(Context.ConnectionId, sala.ToString());
-   
+
 
             if (usersInRoom == 2)
             {
                 await Clients.Group(sala.ToString()).SendAsync("JoinRoom", sala.ToString());
-                //salas.Add(sala);
-                
                 sala++;
                 usersInRoom = 0;
-                //nomeSala = "";
             }
-            
 
-            
         }
         finally
         {
@@ -55,23 +50,15 @@ public class PartidaHub : Hub
     }
 
 
-    public async Task SendMessageToRoom(string roomName, string acao, string valor)
+    public async Task SendMessageToRoom(string roomName)
     {
-        await Clients.Group(roomName).SendAsync("SendMessageToRoom", acao);
+        await Clients.Group(roomName).SendAsync("SendMessageToRoom", "teste");
     }
 
     public override async Task OnDisconnectedAsync(Exception exception)
     {
-        //sala = "";
-        //usersInRoom = 0;
 
         await base.OnDisconnectedAsync(exception);
     }
 
-    /*
-                if (email.Equals(sala))
-                {
-                    sala = "bloqueado";
-                }
-    */
 }
