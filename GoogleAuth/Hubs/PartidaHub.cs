@@ -25,13 +25,12 @@ public class PartidaHub : Hub
             var emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email).Value;
 
             if (emailClaim != null)
-            {
-            }
+            { }
 
             usersInRoom++;
 
-            await Groups.AddToGroupAsync(emailClaim, sala.ToString());
-            await Clients.Group(sala.ToString()).SendAsync("JoinRoom", $"{emailClaim} has joined the group {sala}.");
+            await Groups.AddToGroupAsync(Context.ConnectionId, sala.ToString());
+            await Clients.Group(sala.ToString()).SendAsync("JoinRoom", $"{Context.ConnectionId} has {emailClaim} joined the group {sala}.");
 
             if (usersInRoom == 2)
             {
