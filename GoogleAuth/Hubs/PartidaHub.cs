@@ -22,13 +22,13 @@ public class PartidaHub : Hub
         try
         {
             //Thread.Sleep(10000);
-            var claims = Context.User.Claims;
-            var emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email).Value;
+            //var claims = Context.User.Claims;
+            //var emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email).Value;
 
-            if (emailClaim != null)
-            {
-                nomeSala += emailClaim;
-            }
+            //if (emailClaim != null)
+            //{
+            //    nomeSala += emailClaim;
+            //}
 
             usersInRoom++;
 
@@ -37,7 +37,7 @@ public class PartidaHub : Hub
 
             if (usersInRoom == 2)
             {
-                await Clients.Group(sala.ToString()).SendAsync("JoinRoom", $"{Context.ConnectionId} has {nomeSala} joined the group {sala}.");
+                await Clients.Group(sala.ToString()).SendAsync("JoinRoom", $"has joined the group {sala}.");
                 //salas.Add(sala);
                 if (sala > 1000000)
                 {
@@ -49,7 +49,7 @@ public class PartidaHub : Hub
                 }
                 
                 usersInRoom = 0;
-                nomeSala = "";
+                //nomeSala = "";
             }
             
 
@@ -62,17 +62,9 @@ public class PartidaHub : Hub
     }
 
 
-    public async Task SendMessageToRoom(string roomName, string mensagem)
+    public async Task SendMessageToRoom(string roomName, string acao, string valor)
     {
-        var claims = Context.User.Claims;
-        var emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email);
-
-        string[] nomes = roomName.TrimEnd('/').Split('/');
-
-        if (nomes[0] == emailClaim.Value || nomes[1] == emailClaim.Value)
-        {
-            await Clients.Group(roomName).SendAsync("mensagem", mensagem);
-        }
+        await Clients.Group(roomName).SendAsync("SendMessageToRoom", acao);
     }
 
     public override async Task OnDisconnectedAsync(Exception exception)
