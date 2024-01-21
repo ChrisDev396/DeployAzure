@@ -21,16 +21,17 @@ public class PartidaHub : Hub
         try
         {
             //Thread.Sleep(10000);
-            //var claims = Context.User.Claims;
-            //var emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email);
+            var claims = Context.User.Claims;
+            var emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email).Value;
 
-            //if (emailClaim.Value != null)
-            //{ }
+            if (emailClaim != null)
+            {
+            }
 
             usersInRoom++;
 
-            await Groups.AddToGroupAsync(Context.ConnectionId, sala.ToString());
-            await Clients.Group(sala.ToString()).SendAsync("JoinRoom", $"{Context.ConnectionId} has joined the group {sala.ToString()}.");
+            await Groups.AddToGroupAsync(emailClaim, sala.ToString());
+            await Clients.Group(sala.ToString()).SendAsync("JoinRoom", $"{emailClaim} has joined the group {sala}.");
 
             if (usersInRoom == 2)
             {
