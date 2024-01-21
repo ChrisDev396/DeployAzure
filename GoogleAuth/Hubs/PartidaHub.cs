@@ -15,7 +15,7 @@ public class PartidaHub : Hub
     private static List<string> salas;
     private static string nomeSala = "";
 
-    public async Task JoinRoom(string nomeSala)
+    public async Task JoinRoom(string baralho)
     {
         await _semaphore.WaitAsync();
 
