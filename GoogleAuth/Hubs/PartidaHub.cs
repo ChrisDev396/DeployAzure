@@ -52,7 +52,7 @@ public class PartidaHub : Hub
 
     public async Task SendMessageToRoom(string roomName)
     {
-        await Clients.Group(roomName).SendAsync("SendMessageToRoom", "teste");
+        await Clients.All.SendAsync("SendMessageToRoom", "teste");
     }
 
     public override async Task OnDisconnectedAsync(Exception exception)
