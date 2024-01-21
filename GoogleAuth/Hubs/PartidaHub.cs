@@ -30,12 +30,21 @@ public class PartidaHub : Hub
             usersInRoom++;
 
             await Groups.AddToGroupAsync(Context.ConnectionId, sala.ToString());
-            await Clients.Group(sala.ToString()).SendAsync("JoinRoom", $"{Context.ConnectionId} has {emailClaim} joined the group {sala}.");
+   
 
             if (usersInRoom == 2)
             {
+                await Clients.Group(sala.ToString()).SendAsync("JoinRoom", $"{Context.ConnectionId} has {emailClaim} joined the group {sala}.");
                 //salas.Add(sala);
-                sala++;
+                if (sala > 1000000)
+                {
+                    sala++;
+                }
+                else
+                {
+                    sala = 1;
+                }
+                
                 usersInRoom = 0;
             }
             
