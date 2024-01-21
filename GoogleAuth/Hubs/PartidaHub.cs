@@ -13,6 +13,7 @@ public class PartidaHub : Hub
     private static int sala = 1;
     private static SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
     private static List<string> salas;
+    private static string nomeSala = "";
 
     public async Task JoinRoom(string nomeSala)
     {
@@ -25,7 +26,9 @@ public class PartidaHub : Hub
             var emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email).Value;
 
             if (emailClaim != null)
-            { }
+            {
+                nomeSala += emailClaim;
+            }
 
             usersInRoom++;
 
@@ -34,7 +37,7 @@ public class PartidaHub : Hub
 
             if (usersInRoom == 2)
             {
-                await Clients.Group(sala.ToString()).SendAsync("JoinRoom", $"{Context.ConnectionId} has {emailClaim} joined the group {sala}.");
+                await Clients.Group(sala.ToString()).SendAsync("JoinRoom", $"{Context.ConnectionId} has {nomeSala} joined the group {sala}.");
                 //salas.Add(sala);
                 if (sala > 1000000)
                 {
@@ -46,6 +49,7 @@ public class PartidaHub : Hub
                 }
                 
                 usersInRoom = 0;
+                nomeSala = "";
             }
             
 
