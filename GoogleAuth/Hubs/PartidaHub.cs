@@ -30,7 +30,7 @@ public class PartidaHub : Hub
             usersInRoom++;
 
             await Groups.AddToGroupAsync(Context.ConnectionId, sala.ToString());
-            await Clients.Group(nomeSala).SendAsync("Send", $"{Context.ConnectionId} has joined the group {nomeSala}.");
+            await Clients.Group(nomeSala).SendAsync("JoinRoom", $"{Context.ConnectionId} has joined the group {nomeSala}.");
 
             if (usersInRoom == 2)
             {
