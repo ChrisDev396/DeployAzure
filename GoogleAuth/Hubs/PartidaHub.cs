@@ -39,7 +39,7 @@ public class PartidaHub : Hub
             {
                 await Clients.Group(sala.ToString()).SendAsync("JoinRoom", sala.ToString());
                 //salas.Add(sala);
-                if (sala > 1000000)
+                if (sala < 1000000)
                 {
                     sala++;
                 }
