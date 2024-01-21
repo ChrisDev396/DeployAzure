@@ -10,48 +10,35 @@ using Newtonsoft.Json.Linq;
 public class PartidaHub : Hub
 {
     private static int usersInRoom = 0;
-    private static string sala = "";
+    private static int sala = 1;
     private static SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
     private static List<string> salas;
 
-    public async Task JoinRoom(string baralho)
+    public async Task JoinRoom(string nomeSala)
     {
         await _semaphore.WaitAsync();
 
         try
         {
             //Thread.Sleep(10000);
-            var claims = Context.User.Claims;
-            var emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email);
+            //var claims = Context.User.Claims;
+            //var emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email);
 
-            if (emailClaim.Value != null)
+            //if (emailClaim.Value != null)
+            //{ }
+
+            usersInRoom++;
+
+            await Groups.AddToGroupAsync(Context.ConnectionId, sala.ToString());
+            await Clients.Group(nomeSala).SendAsync("Send", $"{Context.ConnectionId} has joined the group {nomeSala}.");
+
+            if (usersInRoom == 2)
             {
-
-                //string email = emailClaim.Value;
-
-                //if (email.Equals(sala))
-                //{
-                //    sala = "bloqueado";
-                //}
-
-                if (usersInRoom < 2)
-                {
-                    usersInRoom++;
-                    //    if (usersInRoom == 2)
-                    //    {
-                    //        salas.Add(sala);
-                    //    }
-                }
-                else
-                {
-                    sala = "";
-                    usersInRoom = 1;
-                }
-
-                sala += emailClaim.Value + "baralho" + baralho + "/";
-                await Clients.Caller.SendAsync("JoinRoom", sala);
-
+                //salas.Add(sala);
+                sala++;
+                usersInRoom = 0;
             }
+            
 
             
         }
@@ -60,6 +47,7 @@ public class PartidaHub : Hub
             _semaphore.Release();
         }
     }
+
 
     public async Task SendMessageToRoom(string roomName, string mensagem)
     {
