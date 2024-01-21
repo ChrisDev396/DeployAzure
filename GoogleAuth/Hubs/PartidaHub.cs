@@ -37,7 +37,7 @@ public class PartidaHub : Hub
 
             if (usersInRoom == 2)
             {
-                await Clients.Group(sala.ToString()).SendAsync("JoinRoom", $"has joined the group {sala}.");
+                await Clients.Group(sala.ToString()).SendAsync("JoinRoom", sala.ToString());
                 //salas.Add(sala);
                 if (sala > 1000000)
                 {
