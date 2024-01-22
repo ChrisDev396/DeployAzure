@@ -14,12 +14,13 @@ public class PartidaHub : Hub
     private static int sala = 1;
     private static SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
 
-    private static string[] baralhos;
+    private static string[] jogador1;
+    private static string[] jogador2;
     private Dictionary<string, string[]> dictionary = new Dictionary<string, string[]>();
 
     private static List<string> list = new List<string>();
 
-    public async Task JoinRoom(string[] baralho)
+    public async Task JoinRoom(string combatente, string talento, string item)
     {
         await _semaphore.WaitAsync();
 
@@ -37,14 +38,13 @@ public class PartidaHub : Hub
             //baralhos = new string[] { emailClaim ,baralho};
             //baralhos.Concat(baralho);
 
-            list.Add(emailClaim);
+            //list.Add(emailClaim);
             
-            foreach (string valor in baralho)
-            {
-                list.Add(valor);
-            }
+            //foreach (string valor in baralho)
+            //{
+            //    list.Add(valor);
+            //}
 
-            
 
             await Groups.AddToGroupAsync(Context.ConnectionId, sala.ToString());
 
@@ -52,12 +52,17 @@ public class PartidaHub : Hub
 
             if (usersInRoom == 2)
             {
-               
-                await Clients.Group(sala.ToString()).SendAsync("JoinRoom", $"Testes");
-                dictionary.Add(sala.ToString(), list.ToArray());
+                jogador2 = new string[] { combatente, talento, item };
+                jogador1.Concat(jogador2);
+                await Clients.Group(sala.ToString()).SendAsync("JoinRoom", $"Testes{jogador1[0]}");
+                dictionary.Add(sala.ToString(), jogador1);
                 sala++;
                 usersInRoom = 0;
                 //Array.Clear(baralhos, 0, baralhos.Length);
+            }
+            else
+            {
+                jogador1 = new string[] { combatente,talento,item};
             }
 
         }
