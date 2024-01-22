@@ -53,7 +53,7 @@ public class PartidaHub : Hub
             if (usersInRoom == 2)
             {
                
-                await Clients.Group(sala.ToString()).SendAsync("JoinRoom", $"Teste");
+                await Clients.Group(sala.ToString()).SendAsync("JoinRoom", $"Testes");
                 dictionary.Add(sala.ToString(), list.ToArray());
                 sala++;
                 usersInRoom = 0;
