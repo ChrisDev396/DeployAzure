@@ -48,7 +48,7 @@ public class PartidaHub : Hub
                 
                 sala++;
                 usersInRoom = 0;
-                Array.Clear(baralhos, 0, baralhos.Length);
+                //Array.Clear(baralhos, 0, baralhos.Length);
             }
 
         }
