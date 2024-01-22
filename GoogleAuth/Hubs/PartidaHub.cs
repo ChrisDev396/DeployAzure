@@ -20,7 +20,7 @@ public class PartidaHub : Hub
 
     private static List<string> list = new List<string>();
 
-    public async Task JoinRoom(string combatente, string talento, string item)
+    public async Task JoinRoom(string combatente, string carta1, string carta2, string carta3, string carta4, string carta5)
     {
         await _semaphore.WaitAsync();
 
@@ -52,7 +52,7 @@ public class PartidaHub : Hub
 
             if (usersInRoom == 2)
             {
-                jogador2 = new string[] { combatente, talento, item };
+                jogador2 = new string[] { emailClaim, combatente, carta1, carta2, carta3, carta4, carta5 };
                 jogador1.Concat(jogador2);
                 await Clients.Group(sala.ToString()).SendAsync("JoinRoom", $"Testes{jogador1[0]}");
                 dictionary.Add(sala.ToString(), jogador1);
@@ -62,7 +62,7 @@ public class PartidaHub : Hub
             }
             else
             {
-                jogador1 = new string[] { combatente,talento,item};
+                jogador1 = new string[] { emailClaim, combatente, carta1, carta2, carta3, carta4, carta5 };
             }
 
         }
