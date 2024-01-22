@@ -58,7 +58,7 @@ public class PartidaHub : Hub
                 valorAleatorio = !valorAleatorio;
                 jogador2 = new Jogador(emailClaim, baralho, valorAleatorio);
                 
-                await Clients.Group(sala.ToString()).SendAsync("JoinRoom", sala.ToString(),valorAleatorio);
+                await Clients.Group(sala.ToString()).SendAsync("JoinRoom", sala.ToString());
 
                 list.Add(jogador1);
                 list.Add(jogador2);
@@ -66,7 +66,7 @@ public class PartidaHub : Hub
 
                 sala++;
                 usersInRoom = 0;
-                
+                list.Clear();
                
             }
             else
