@@ -17,7 +17,9 @@ public class PartidaHub : Hub
     private static string[] baralhos;
     private Dictionary<string, string[]> dictionary = new Dictionary<string, string[]>();
 
-    public async Task JoinRoom(string baralho)
+    private static List<string> list = new List<string>();
+
+    public async Task JoinRoom(string[] baralho)
     {
         await _semaphore.WaitAsync();
 
@@ -32,9 +34,17 @@ public class PartidaHub : Hub
 
             usersInRoom++;
 
-            baralhos = new string[] { emailClaim ,baralho};
+            //baralhos = new string[] { emailClaim ,baralho};
             //baralhos.Concat(baralho);
 
+            list.Add(emailClaim);
+            
+            foreach (string valor in baralho)
+            {
+                list.Add(valor);
+            }
+
+            
 
             await Groups.AddToGroupAsync(Context.ConnectionId, sala.ToString());
 
@@ -43,8 +53,8 @@ public class PartidaHub : Hub
             if (usersInRoom == 2)
             {
                
-                await Clients.Group(sala.ToString()).SendAsync("JoinRoom", $"Teste{baralhos[0]} {baralhos[1]}");
-                dictionary.Add(sala.ToString(), baralhos);
+                await Clients.Group(sala.ToString()).SendAsync("JoinRoom", $"Teste{list[0]} {list[7]}");
+                dictionary.Add(sala.ToString(), list.ToArray());
                 sala++;
                 usersInRoom = 0;
                 //Array.Clear(baralhos, 0, baralhos.Length);
