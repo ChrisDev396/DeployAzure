@@ -17,7 +17,7 @@ public class PartidaHub : Hub
     private static string[] baralhos;
     private Dictionary<string, string[]> dictionary = new Dictionary<string, string[]>();
 
-    public async Task JoinRoom(string[] baralho)
+    public async Task JoinRoom(string baralho)
     {
         await _semaphore.WaitAsync();
 
@@ -33,8 +33,8 @@ public class PartidaHub : Hub
 
             usersInRoom++;
 
-            baralhos = new string[] { emailClaim };
-            baralhos.Concat(baralho);
+            baralhos = new string[] { emailClaim ,baralho};
+            //baralhos.Concat(baralho);
 
 
             await Groups.AddToGroupAsync(Context.ConnectionId, sala.ToString());
