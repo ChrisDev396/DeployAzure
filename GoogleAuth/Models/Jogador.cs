@@ -2,7 +2,7 @@
 using System;
 public class Jogador
 {
-	public Jogador(string nome, string baralho, bool turno,string sala)
+	public Jogador(string nome, string[] baralho, bool turno,string sala)
 	{
         this.nome = nome;
         this.baralho = baralho;
@@ -13,7 +13,7 @@ public class Jogador
     public bool turno { get; set; }
     public string nome { get; set; }
     public string sala { get; set; }
-    public string baralho { get; set; }
+    public string[] baralho { get; set; }
     
     public int vida { get; set; }
     public int forca { get; set; }
