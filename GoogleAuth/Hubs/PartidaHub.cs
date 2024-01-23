@@ -44,28 +44,26 @@ public class PartidaHub : Hub
 
             if (usersInRoom == 2)
             {
+                //valorAleatorio = !valorAleatorio;
+                //jogador2 = new Jogador(emailClaim, baralho, valorAleatorio, sala.ToString());
+                
+                //list.Add(jogador1);
+                //list.Add(jogador2);
+                //dictionary.Add(sala.ToString(), list);
+                //list.Clear();
+
                 await Clients.Group(sala.ToString()).SendAsync("JoinRoom", sala.ToString());
-
-                valorAleatorio = !valorAleatorio;
-                jogador2 = new Jogador(emailClaim, baralho, valorAleatorio, sala.ToString());
-                
-                list.Add(jogador1);
-                list.Add(jogador2);
-                dictionary.Add(sala.ToString(), list);
-                list.Clear();
-
-                
 
                 sala++;
                 usersInRoom = 0;
             }
             else
             {
-                valorAleatorio = new Random().Next(2) == 0;
-                jogador1 = new Jogador(emailClaim, baralho, valorAleatorio, sala.ToString());
+                //valorAleatorio = new Random().Next(2) == 0;
+                //jogador1 = new Jogador(emailClaim, baralho, valorAleatorio, sala.ToString());
                 
             }
-
+           
         }
         finally
         {
