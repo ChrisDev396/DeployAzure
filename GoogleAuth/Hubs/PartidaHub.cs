@@ -74,19 +74,19 @@ public class PartidaHub : Hub
 
     public async Task SendMessageToRoom(string roomName)
     {
-        if (dictionary.ContainsKey(roomName))
-        {
-            foreach (var jogador in dictionary[roomName])
-            {
-                await Clients.Group(roomName).SendAsync("SendMessageToRoom", jogador.nome);
-            }
-        }
-        else
-        {
-            await Clients.Group(roomName).SendAsync("SendMessageToRoom", "Sala não encontrada.");
-        }
+        //if (dictionary.ContainsKey(roomName))
+        //{
+        //    foreach (var jogador in dictionary[roomName])
+        //    {
+        //        await Clients.Group(roomName).SendAsync("SendMessageToRoom", jogador.nome);
+        //    }
+        //}
+        //else
+        //{
+        //    await Clients.Group(roomName).SendAsync("SendMessageToRoom", "Sala não encontrada.");
+        //}
+        await Clients.Group(roomName).SendAsync("SendMessageToRoom", roomName);
 
-        
 
     }
 
