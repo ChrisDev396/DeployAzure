@@ -31,11 +31,11 @@ public class PartidaHub : Hub
         try
         {
             //Thread.Sleep(10000);
-            var claims = Context.User.Claims;
-            string emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email).Value;
+            //var claims = Context.User.Claims;
+            //var emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email).Value;
 
-            if (emailClaim != null)
-            {}
+            //if (emailClaim != null)
+            //{}
 
             usersInRoom++;
 
