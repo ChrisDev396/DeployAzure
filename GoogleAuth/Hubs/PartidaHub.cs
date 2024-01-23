@@ -30,13 +30,6 @@ public class PartidaHub : Hub
 
         try
         {
-            //Thread.Sleep(10000);
-            //var claims = Context.User.Claims;
-            //var emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email).Value;
-
-            //if (emailClaim != null)
-            //{}
-
             usersInRoom++;
 
             await Groups.AddToGroupAsync(Context.ConnectionId, sala.ToString());
@@ -64,8 +57,6 @@ public class PartidaHub : Hub
                 jogador1 = new Jogador(Context.ConnectionId.ToString(), baralho, valorAleatorio, sala.ToString());
 
             }
-
-
         }
         finally
         {
@@ -77,18 +68,18 @@ public class PartidaHub : Hub
 
     public async Task SendMessageToRoom(string roomName)
     {
-        //if (dictionary.ContainsKey(roomName))
-        //{
-        //    foreach (var jogador in dictionary[roomName])
-        //    {
-        //        await Clients.Group(roomName).SendAsync("SendMessageToRoom", jogador.nome);
-        //    }
-        //}
-        //else
-        //{
-        //    await Clients.Group(roomName).SendAsync("SendMessageToRoom", "Sala não encontrada.");
-        //}
-        await Clients.Group(roomName).SendAsync("SendMessageToRoom", roomName);
+        if (dictionary.ContainsKey(roomName))
+        {
+            foreach (var jogador in dictionary[roomName])
+            {
+                await Clients.Group(roomName).SendAsync("SendMessageToRoom", $"{jogador.nome} {jogador.vida}{jogador.forca}");
+            }
+        }
+        else
+        {
+            await Clients.Group(roomName).SendAsync("SendMessageToRoom", "Sala não encontrada.");
+        }
+        //await Clients.Group(roomName).SendAsync("SendMessageToRoom", roomName);
 
 
     }
@@ -100,7 +91,7 @@ public class PartidaHub : Hub
     }
 
     
-    //    if (jogadores.ContainsKey(chaveASerRemovida))
+    //if (jogadores.ContainsKey(chaveASerRemovida))
     //{
     //    jogadores.Remove(chaveASerRemovida);
     //    Console.WriteLine($"Chave {chaveASerRemovida} removida do cache.");
