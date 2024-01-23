@@ -15,14 +15,14 @@ public class PartidaHub : Hub
     private static int sala = 1;
     private static SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
 
-    //private static Jogador jogador1;
-    //private static Jogador jogador2;
+    private static Jogador jogador1;
+    private static Jogador jogador2;
 
-    //private Dictionary<string, List<Jogador>> dictionary = new Dictionary<string, List<Jogador>>();
+    private static Dictionary<string, List<Jogador>> dictionary;// = new Dictionary<string, List<Jogador>>();
 
-    //private static List<Jogador> list = new List<Jogador>();
+    private static List<Jogador> list; //= new List<Jogador>();
 
-    //private static bool valorAleatorio = false;
+    private static bool valorAleatorio;// = false;
 
     public async Task JoinRoom(string[] baralho)
     {
@@ -52,7 +52,7 @@ public class PartidaHub : Hub
                 //dictionary.Add(sala.ToString(), list);
                 //list.Clear();
 
-                await Clients.Group(sala.ToString()).SendAsync("JoinRoom", sala.ToString());
+                
 
                 sala++;
                 usersInRoom = 0;
@@ -63,7 +63,7 @@ public class PartidaHub : Hub
                 //jogador1 = new Jogador(emailClaim, baralho, valorAleatorio, sala.ToString());
                 
             }
-           
+            await Clients.Group(sala.ToString()).SendAsync("JoinRoom", sala.ToString());
         }
         finally
         {
