@@ -70,10 +70,19 @@ public class PartidaHub : Hub
     {
         if (dictionary.ContainsKey(roomName))
         {
-            foreach (var jogador in dictionary[roomName])
+            List<Jogador> jogadores = dictionary[roomName];
+
+            // Crie uma lista para armazenar os nomes dos jogadores
+            List<string> nomesJogadores = new List<string>();
+
+            // Adicione o nome de cada jogador à lista
+            foreach (Jogador jogador in jogadores)
             {
-                await Clients.Group(roomName).SendAsync("SendMessageToRoom", jogador.nome);
+                nomesJogadores.Add(jogador.nome);
             }
+
+            // Envie a lista de nomes para o grupo
+            await Clients.Group(roomName).SendAsync("SendMessageToRoom", nomesJogadores);
         }
         else
         {
