@@ -15,62 +15,63 @@ public class PartidaHub : Hub
     private static int sala = 1;
     private static SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
 
-    //private static Jogador jogador1;
-    //private static Jogador jogador2;
+    private static Jogador jogador1;
+    private static Jogador jogador2;
 
-    //private static Dictionary<string, List<Jogador>> dictionary = new Dictionary<string, List<Jogador>>();
+    private static Dictionary<string, List<Jogador>> dictionary = new Dictionary<string, List<Jogador>>();
 
-    //private static List<Jogador> list= new List<Jogador>();
+    private static List<Jogador> list = new List<Jogador>();
 
-    //private static bool valorAleatorio = false;
+    private static bool valorAleatorio = false;
 
     public async Task JoinRoom(string[] baralho)
     {
-        await _semaphore.WaitAsync();
+        //await _semaphore.WaitAsync();
 
-        try
-        {
-            //Thread.Sleep(10000);
-            //var claims = Context.User.Claims;
-            //var emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email).Value;
+        //try
+        //{
+        //    //Thread.Sleep(10000);
+        //    //var claims = Context.User.Claims;
+        //    //var emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email).Value;
 
-            //if (emailClaim != null)
-            //{}
+        //    //if (emailClaim != null)
+        //    //{}
 
-            usersInRoom++;
+        //    usersInRoom++;
 
-            await Groups.AddToGroupAsync(Context.ConnectionId, sala.ToString());
-            
+        //    await Groups.AddToGroupAsync(Context.ConnectionId, sala.ToString());
 
-            if (usersInRoom == 2)
-            {
-                //valorAleatorio = !valorAleatorio;
-                //jogador2 = new Jogador(Context.ConnectionId.ToString(), baralho, valorAleatorio, sala.ToString());
 
-                //list.Add(jogador1);
-                //list.Add(jogador2);
-                //dictionary.Add(sala.ToString(), list);
-                //list.Clear();
+        //    if (usersInRoom == 2)
+        //    {
+        //        //valorAleatorio = !valorAleatorio;
+        //        //jogador2 = new Jogador(Context.ConnectionId.ToString(), baralho, valorAleatorio, sala.ToString());
 
-                await Clients.Group(sala.ToString()).SendAsync("JoinRoom", sala.ToString());
+        //        //list.Add(jogador1);
+        //        //list.Add(jogador2);
+        //        //dictionary.Add(sala.ToString(), list);
+        //        //list.Clear();
 
-                sala++;
-                usersInRoom = 0;
-                
-            }
-            else
-            {
-                //valorAleatorio = new Random().Next(2) == 0;
-                //jogador1 = new Jogador(Context.ConnectionId.ToString(), baralho, valorAleatorio, sala.ToString());
+        //        await Clients.Group(sala.ToString()).SendAsync("JoinRoom", sala.ToString());
 
-            }
+        //        sala++;
+        //        usersInRoom = 0;
 
-            
-        }
-        finally
-        {
-            _semaphore.Release();
-        }
+        //    }
+        //    else
+        //    {
+        //        //valorAleatorio = new Random().Next(2) == 0;
+        //        //jogador1 = new Jogador(Context.ConnectionId.ToString(), baralho, valorAleatorio, sala.ToString());
+
+        //    }
+
+
+        //}
+        //finally
+        //{
+        //    _semaphore.Release();
+        //}
+        await Clients.All.SendAsync("JoinRoom", sala.ToString());
     }
 
 
