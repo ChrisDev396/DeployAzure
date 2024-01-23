@@ -15,14 +15,14 @@ public class PartidaHub : Hub
     private static int sala = 1;
     private static SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
 
-    private static Jogador jogador1;
-    private static Jogador jogador2;
+    //private static Jogador jogador1;
+    //private static Jogador jogador2;
 
-    private static Dictionary<string, List<Jogador>> dictionary = new Dictionary<string, List<Jogador>>();
+    //private static Dictionary<string, List<Jogador>> dictionary = new Dictionary<string, List<Jogador>>();
 
-    private static List<Jogador> list= new List<Jogador>();
+    //private static List<Jogador> list= new List<Jogador>();
 
-    private static bool valorAleatorio = false;
+    //private static bool valorAleatorio = false;
 
     public async Task JoinRoom(string[] baralho)
     {
