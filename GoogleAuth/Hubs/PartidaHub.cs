@@ -82,7 +82,7 @@ public class PartidaHub : Hub
             }
 
             // Envie a lista de nomes para o grupo
-            await Clients.Group(roomName).SendAsync("SendMessageToRoom", nomesJogadores);
+            await Clients.Group(roomName).SendAsync("SendMessageToRoom", $"{nomesJogadores[0]}teste{nomesJogadores[1]}");
         }
         else
         {
