@@ -32,28 +32,20 @@ public class PartidaHub : Hub
         {
             //Thread.Sleep(10000);
             var claims = Context.User.Claims;
-            var emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email).Value;
+            string emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email).Value;
 
             if (emailClaim != null)
             {}
 
             usersInRoom++;
 
-            //baralhos = new string[] { emailClaim ,baralho};
-            //baralhos.Concat(baralho);
-
-            foreach (string valor in baralho)
-            {
-                
-            }
-
-
             await Groups.AddToGroupAsync(Context.ConnectionId, sala.ToString());
-
             
 
             if (usersInRoom == 2)
             {
+                await Clients.Group(sala.ToString()).SendAsync("JoinRoom", sala.ToString());
+
                 valorAleatorio = !valorAleatorio;
                 jogador2 = new Jogador(emailClaim, baralho, valorAleatorio, sala.ToString());
                 
@@ -62,7 +54,7 @@ public class PartidaHub : Hub
                 dictionary.Add(sala.ToString(), list);
                 list.Clear();
 
-                await Clients.Group(sala.ToString()).SendAsync("JoinRoom", sala.ToString());
+                
 
                 sala++;
                 usersInRoom = 0;
