@@ -24,7 +24,7 @@ public class PartidaHub : Hub
 
     private static bool valorAleatorio = false;
 
-    public async Task JoinRoom(string[] baralho)
+    public async Task JoinRoom(string baralho)
     {
         //await _semaphore.WaitAsync();
 
