@@ -42,7 +42,6 @@ public class PartidaHub : Hub
             //baralhos = new string[] { emailClaim ,baralho};
             //baralhos.Concat(baralho);
 
-
             foreach (string valor in baralho)
             {
                 
@@ -56,7 +55,7 @@ public class PartidaHub : Hub
             if (usersInRoom == 2)
             {
                 valorAleatorio = !valorAleatorio;
-                jogador2 = new Jogador(emailClaim, baralho, valorAleatorio);
+                jogador2 = new Jogador(emailClaim, baralho, valorAleatorio, sala.ToString());
                 
                 list.Add(jogador1);
                 list.Add(jogador2);
@@ -71,7 +70,7 @@ public class PartidaHub : Hub
             else
             {
                 valorAleatorio = new Random().Next(2) == 0;
-                jogador1 = new Jogador(emailClaim, baralho, valorAleatorio);
+                jogador1 = new Jogador(emailClaim, baralho, valorAleatorio, sala.ToString());
                 
             }
 
@@ -87,10 +86,17 @@ public class PartidaHub : Hub
     {
         if (dictionary.ContainsKey(roomName))
         {
-            
+            foreach (var jogador in dictionary[roomName])
+            {
+                await Clients.Group(roomName).SendAsync("SendMessageToRoom", jogador.nome);
+            }
+        }
+        else
+        {
+            await Clients.Group(roomName).SendAsync("SendMessageToRoom", "Sala não encontrada.");
         }
 
-        await Clients.Group(roomName).SendAsync("SendMessageToRoom", "testeeee");
+        
 
     }
 
@@ -99,13 +105,15 @@ public class PartidaHub : Hub
 
         await base.OnDisconnectedAsync(exception);
     }
-//    if (jogadores.ContainsKey(chaveASerRemovida))
-//{
-//    jogadores.Remove(chaveASerRemovida);
-//    Console.WriteLine($"Chave {chaveASerRemovida} removida do cache.");
-//}
-//else
-//{
-//    Console.WriteLine($"Chave {chaveASerRemovida} não encontrada no cache.");
-//}
+
+    
+    //    if (jogadores.ContainsKey(chaveASerRemovida))
+    //{
+    //    jogadores.Remove(chaveASerRemovida);
+    //    Console.WriteLine($"Chave {chaveASerRemovida} removida do cache.");
+    //}
+    //else
+    //{
+    //    Console.WriteLine($"Chave {chaveASerRemovida} não encontrada no cache.");
+    //}
 }
