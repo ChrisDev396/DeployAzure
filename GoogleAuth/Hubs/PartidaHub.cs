@@ -68,33 +68,28 @@ public class PartidaHub : Hub
 
     public async Task SendMessageToRoom(string roomName)
     {
-        await Clients.Group(roomName).SendAsync("SendMessageToRoom", "Sucesso");
+        
         if (dictionary.ContainsKey(roomName))
         {
-            //List<Jogador> jogadores = dictionary[roomName];
+            List<Jogador> jogadores = dictionary[roomName];
 
-            //// Crie uma lista para armazenar os nomes dos jogadores
-            //List<string> nomesJogadores = new List<string>();
+            // Crie uma lista para armazenar os nomes dos jogadores
+            List<string> nomesJogadores = new List<string>();
 
-            //// Adicione o nome de cada jogador à lista
-            //foreach (Jogador jogador in jogadores)
-            //{
-            //    nomesJogadores.Add(jogador.nome);
-            //}
+            // Adicione o nome de cada jogador à lista
+            foreach (Jogador jogador in jogadores)
+            {
+                nomesJogadores.Add(jogador.nome);
+            }
 
-            //roomName = $"{nomesJogadores[0]} teste {nomesJogadores[1]}";
-            roomName = "achou";
-            // Envie a lista de nomes para o grupo
-            //await Clients.Group(roomName).SendAsync("SendMessageToRoom", $"{nomesJogadores[0]}teste{nomesJogadores[1]}");
+            string resultado = string.Join(", ", nomesJogadores);
+            await Clients.Group(roomName).SendAsync("SendMessageToRoom", resultado);
         }
         else
         {
-            //await Clients.Group(roomName).SendAsync("SendMessageToRoom", "Sala não encontrada.");
-            roomName = "erro";
+            await Clients.Group(roomName).SendAsync("SendMessageToRoom", "Sala não encontrada.");
+           
         }
-        
-        await Clients.Group(roomName).SendAsync("SendMessageToRoom", roomName);
-
 
     }
     
