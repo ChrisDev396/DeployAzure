@@ -68,7 +68,7 @@ public class PartidaHub : Hub
 
     public async Task SendMessageToRoom(string roomName)
     {
-        int nome = 0;
+        string nome = "";
         if (dictionary.ContainsKey(roomName))
         {
            
@@ -77,12 +77,12 @@ public class PartidaHub : Hub
             List<string> nomesJogadores = new List<string>();
 
             // Adicione o nome de cada jogador à lista
-            foreach (Jogador jogador in dictionary[roomName])
-            {
-                nomesJogadores.Add(jogador.nome);
-                //nome = jogador.nome;
-            }
-            //nome = dictionary[roomName][1].nome;
+            //foreach (Jogador jogador in dictionary[roomName])
+            //{
+            //    nomesJogadores.Add(jogador.nome);
+            //    //nome = jogador.nome;
+            //}
+            nome = dictionary[roomName][1].nome;
 
 
         }
@@ -91,7 +91,7 @@ public class PartidaHub : Hub
             await Clients.Group(roomName).SendAsync("SendMessageToRoom", "Sala não encontrada.");
            
         }
-        await Clients.Group(roomName).SendAsync("SendMessageToRoom", nome.ToString());
+        await Clients.Group(roomName).SendAsync("SendMessageToRoom", nome);
     }
     
 public override async Task OnDisconnectedAsync(Exception exception)
