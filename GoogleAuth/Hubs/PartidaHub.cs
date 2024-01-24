@@ -90,7 +90,7 @@ public class PartidaHub : Hub
             await Clients.Group(roomName).SendAsync("SendMessageToRoom", "Sala não encontrada.");
            
         }
-        await Clients.Group(roomName).SendAsync("SendMessageToRoom", "testessss");
+        await Clients.Group(roomName).SendAsync("SendMessageToRoom", nome);
     }
     
 public override async Task OnDisconnectedAsync(Exception exception)
