@@ -45,7 +45,7 @@ public class PartidaHub : Hub
                 dictionary.Add(sala.ToString(), list);
                 list.Clear();
 
-                await Clients.Group(sala.ToString()).SendAsync("JoinRoom", sala.ToString());
+                await Clients.Group(sala.ToString()).SendAsync("JoinRoom", dictionary[sala.ToString()][1].nome);
 
                 sala++;
                 usersInRoom = 0;
@@ -81,7 +81,6 @@ public class PartidaHub : Hub
             {
                 nomesJogadores.Add(jogador.nome);
                 //nome = jogador.nome;
-                nome++;
             }
             //nome = dictionary[roomName][1].nome;
 
