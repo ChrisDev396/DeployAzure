@@ -2,16 +2,18 @@
 using System;
 public class Jogador
 {
-	public Jogador(string nome, string[] baralho, bool turno,string sala)
+	public Jogador(string usuario, string nome, string[] baralho, bool turno)
 	{
+        this.usuario = usuario;
         this.nome = nome;
         this.baralho = baralho;
         this.turno = turno;
-        getHeroi(baralho[0]);
+        getHeroi(baralho[1]);
     }
 
     //public string sala { get; set; }
     public bool turno { get; set; }
+    public string usuario { get; set; }
     public string nome { get; set; }
     public string[] baralho { get; set; }
 
@@ -26,7 +28,6 @@ public class Jogador
 
         if (this.heroi == "brutaniuz")
         {
-            
             vida = 15;
             forca = 3;
         }
