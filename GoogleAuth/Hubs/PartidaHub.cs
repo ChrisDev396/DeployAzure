@@ -82,8 +82,9 @@ public class PartidaHub : Hub
                 nomesJogadores.Add(jogador.nome);
                 nome = jogador.nome;
             }
+            nome = dictionary[roomName][1].nome;
 
-            
+
         }
         else
         {
