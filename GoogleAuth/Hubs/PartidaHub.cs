@@ -43,7 +43,7 @@ public class PartidaHub : Hub
                 list.Add(jogador1);
                 list.Add(jogador2);
                 dictionary.Add(sala.ToString(), list);
-                list.Clear();
+                //list.Clear();
 
                 await Clients.Group(sala.ToString()).SendAsync("JoinRoom", dictionary[sala.ToString()][1].nome);
 
