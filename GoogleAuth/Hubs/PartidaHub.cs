@@ -80,9 +80,10 @@ public class PartidaHub : Hub
             foreach (Jogador jogador in jogadores)
             {
                 nomesJogadores.Add(jogador.nome);
+                await Clients.Group(roomName).SendAsync("SendMessageToRoom", jogador.nome);
             }
 
-            await Clients.Group(roomName).SendAsync("SendMessageToRoom", nomesJogadores.ToArray());
+            
         }
         else
         {
