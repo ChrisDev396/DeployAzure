@@ -82,8 +82,7 @@ public class PartidaHub : Hub
                 nomesJogadores.Add(jogador.nome);
             }
 
-            string resultado = string.Join(", ", nomesJogadores);
-            await Clients.Group(roomName).SendAsync("SendMessageToRoom", resultado);
+            await Clients.Group(roomName).SendAsync("SendMessageToRoom", nomesJogadores.ToString());
         }
         else
         {
