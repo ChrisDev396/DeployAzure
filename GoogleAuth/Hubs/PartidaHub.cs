@@ -38,7 +38,7 @@ public class PartidaHub : Hub
             if (usersInRoom == 2)
             {
                 valorAleatorio = !valorAleatorio;
-                jogador2 = new Jogador(Context.ConnectionId.ToString(), baralho, valorAleatorio, sala.ToString());
+                jogador2 = new Jogador("Ze da Manga", baralho, valorAleatorio, sala.ToString());
 
                 list.Add(jogador1);
                 list.Add(jogador2);
@@ -54,7 +54,7 @@ public class PartidaHub : Hub
             else
             {
                 valorAleatorio = new Random().Next(2) == 0;
-                jogador1 = new Jogador(Context.ConnectionId.ToString(), baralho, valorAleatorio, sala.ToString());
+                jogador1 = new Jogador("HideBush", baralho, valorAleatorio, sala.ToString());
 
             }
         }
