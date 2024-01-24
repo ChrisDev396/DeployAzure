@@ -68,19 +68,19 @@ public class PartidaHub : Hub
 
     public async Task SendMessageToRoom(string roomName)
     {
-        
+        string nome = "";
         if (dictionary.ContainsKey(roomName))
         {
-            List<Jogador> jogadores = dictionary[roomName];
+           
 
             // Crie uma lista para armazenar os nomes dos jogadores
             List<string> nomesJogadores = new List<string>();
 
             // Adicione o nome de cada jogador à lista
-            foreach (Jogador jogador in jogadores)
+            foreach (Jogador jogador in dictionary[roomName])
             {
                 nomesJogadores.Add(jogador.nome);
-               
+                nome = jogador.nome;
             }
 
             
