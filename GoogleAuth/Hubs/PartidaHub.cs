@@ -68,7 +68,7 @@ public class PartidaHub : Hub
 
     public async Task SendMessageToRoom(string roomName)
     {
-        string nome = "";
+        int nome = 0;
         if (dictionary.ContainsKey(roomName))
         {
            
@@ -80,9 +80,10 @@ public class PartidaHub : Hub
             foreach (Jogador jogador in dictionary[roomName])
             {
                 nomesJogadores.Add(jogador.nome);
-                nome = jogador.nome;
+                //nome = jogador.nome;
+                nome++;
             }
-            nome = dictionary[roomName][1].nome;
+            //nome = dictionary[roomName][1].nome;
 
 
         }
@@ -91,7 +92,7 @@ public class PartidaHub : Hub
             await Clients.Group(roomName).SendAsync("SendMessageToRoom", "Sala não encontrada.");
            
         }
-        await Clients.Group(roomName).SendAsync("SendMessageToRoom", nome);
+        await Clients.Group(roomName).SendAsync("SendMessageToRoom", nome.ToString());
     }
     
 public override async Task OnDisconnectedAsync(Exception exception)
