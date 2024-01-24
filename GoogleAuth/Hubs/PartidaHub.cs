@@ -80,7 +80,7 @@ public class PartidaHub : Hub
             foreach (Jogador jogador in jogadores)
             {
                 nomesJogadores.Add(jogador.nome);
-                await Clients.Group(roomName).SendAsync("SendMessageToRoom", jogador.nome);
+               
             }
 
             
@@ -90,7 +90,7 @@ public class PartidaHub : Hub
             await Clients.Group(roomName).SendAsync("SendMessageToRoom", "Sala não encontrada.");
            
         }
-
+        await Clients.Group(roomName).SendAsync("SendMessageToRoom", "testessss");
     }
     
 public override async Task OnDisconnectedAsync(Exception exception)
