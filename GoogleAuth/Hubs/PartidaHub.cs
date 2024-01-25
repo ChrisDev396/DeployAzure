@@ -49,7 +49,7 @@ public class PartidaHub : Hub
                 list.Add(jogador2);
                 dictionary.Add(sala.ToString(), list);
 
-                await Clients.Group(sala.ToString()).SendAsync("JoinRoom", sala.ToString());
+                await Clients.Group(sala.ToString()).SendAsync("JoinRoom", dictionary[sala.ToString()][0].nome+ dictionary[sala.ToString()][1].nome);
 
                 sala++;
                 usersInRoom = 0;
@@ -110,8 +110,8 @@ public class PartidaHub : Hub
        
         if (dictionary.ContainsKey(roomName))
         {
-            string[] jogadorInfo1 = { roomName, dictionary[roomName][0].forca.ToString(), dictionary[roomName][0].vida.ToString() };
-            string[] jogadorInfo2 = { roomName, dictionary[roomName][1].forca.ToString(), dictionary[roomName][1].vida.ToString() };
+            string[] jogadorInfo1 = { dictionary[roomName][0].nome, dictionary[roomName][0].forca.ToString(), dictionary[roomName][0].vida.ToString() };
+            string[] jogadorInfo2 = { dictionary[roomName][1].nome, dictionary[roomName][1].forca.ToString(), dictionary[roomName][1].vida.ToString() };
 
             await Clients.Group(roomName).SendAsync("GetJogadoresStatus", jogadorInfo1, jogadorInfo2);
         }
