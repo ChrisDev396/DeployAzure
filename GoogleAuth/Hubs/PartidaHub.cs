@@ -72,7 +72,7 @@ public class PartidaHub : Hub
     }
 
 
-    public async Task SendMessageToRoom(string roomName, string turno)
+    public async Task SendMessageToRoom(string roomName)
     {
         string nome = "";
         if (dictionary.ContainsKey(roomName))
