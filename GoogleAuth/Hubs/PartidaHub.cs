@@ -33,8 +33,8 @@ public class PartidaHub : Hub
             var claims = Context.User.Claims;
             var emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email);
 
-            if (emailClaim.Value != null)
-            {}
+            //if (emailClaim.Value != null)
+            //{}
 
             usersInRoom++;
 
