@@ -33,8 +33,8 @@ public class PartidaHub : Hub
             var claims = Context.User.Claims;
             var emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email);
 
-            //if (emailClaim.Value != null)
-            //{}
+            if (emailClaim.Value != null)
+            {}
 
             usersInRoom++;
 
@@ -49,7 +49,7 @@ public class PartidaHub : Hub
                 list.Add(jogador2);
                 dictionary.Add(sala.ToString(), list);
 
-                await Clients.Group(sala.ToString()).SendAsync("JoinRoom", baralho[0]);
+                await Clients.Group(sala.ToString()).SendAsync("JoinRoom", sala.ToString());
 
                 sala++;
                 usersInRoom = 0;
