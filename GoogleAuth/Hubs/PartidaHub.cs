@@ -106,8 +106,26 @@ public class PartidaHub : Hub
         }
         
     }
-    
-public override async Task OnDisconnectedAsync(Exception exception)
+
+    public async Task GetJogadoresStatus(string roomName)
+    {
+       
+        if (dictionary.ContainsKey(roomName))
+        {
+            string[] jogadorInfo1 = { dictionary[roomName][0].turno.ToString(), dictionary[roomName][0].nome, dictionary[roomName][0].forca.ToString(), dictionary[roomName][0].vida.ToString() };
+            string[] jogadorInfo2 = { dictionary[roomName][1].turno.ToString(), dictionary[roomName][1].forca.ToString(), dictionary[roomName][1].vida.ToString() };
+
+            await Clients.Group(roomName).SendAsync("GetJogadoresStatus", jogadorInfo1, jogadorInfo2);
+        }
+        else
+        {
+            await Clients.Group(roomName).SendAsync("GetJogadoresStatus", "Sala não encontrada.");
+
+        }
+
+    }
+
+    public override async Task OnDisconnectedAsync(Exception exception)
     {
 
         await base.OnDisconnectedAsync(exception);
