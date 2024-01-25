@@ -87,14 +87,14 @@ public class PartidaHub : Hub
             //    nomesJogadores.Add(jogador.nome);
             //    //nome = jogador.nome;
             //}
-            if (dictionary[roomName][0].nome == turno)
-            {
-                nome = dictionary[roomName][1].nome;
-            }
-            else
-            {
-                nome = dictionary[roomName][1].nome;
-            }
+            //if (dictionary[roomName][0].nome == turno)
+            //{
+            //    nome = dictionary[roomName][1].nome;
+            //}
+            //else
+            //{
+            //    nome = dictionary[roomName][1].nome;
+            //}
             await Clients.Group(roomName).SendAsync("SendMessageToRoom", nome);
 
 
