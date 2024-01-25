@@ -30,54 +30,37 @@ public class PartidaHub : Hub
 
         try
         {
-            bool emSala = false;
-            try
+            var claims = Context.User.Claims;
+            var emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email);
+
+            if (emailClaim.Value != null)
+            {}
+
+            usersInRoom++;
+
+            await Groups.AddToGroupAsync(Context.ConnectionId, sala.ToString());
+
+            if (usersInRoom == 2)
             {
-                await Clients.Client(Context.ConnectionId).SendAsync("VerificacaoPing", "Em sala");
-                emSala = true;
+                valorAleatorio = !valorAleatorio;
+                jogador2 = new Jogador(emailClaim.Value, baralho[0], baralho, valorAleatorio);
+
+                list.Add(jogador1);
+                list.Add(jogador2);
+                dictionary.Add(sala.ToString(), list);
+
+                await Clients.Group(sala.ToString()).SendAsync("JoinRoom", sala.ToString());
+
+                sala++;
+                usersInRoom = 0;
+
             }
-            catch
+            else
             {
-                emSala = false;
+                valorAleatorio = new Random().Next(2) == 0;
+                jogador1 = new Jogador(emailClaim.Value, baralho[0], baralho, valorAleatorio);
+
             }
-
-            if (!emSala)
-            {
-                var claims = Context.User.Claims;
-                var emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email);
-
-                if (emailClaim.Value != null)
-                {
-
-                }
-
-                usersInRoom++;
-
-                await Groups.AddToGroupAsync(Context.ConnectionId, sala.ToString());
-
-                if (usersInRoom == 2)
-                {
-                    valorAleatorio = !valorAleatorio;
-                    jogador2 = new Jogador(emailClaim.Value, baralho[0], baralho, valorAleatorio);
-
-                    list.Add(jogador1);
-                    list.Add(jogador2);
-                    dictionary.Add(sala.ToString(), list);
-
-                    await Clients.Group(sala.ToString()).SendAsync("JoinRoom", sala.ToString());
-
-                    sala++;
-                    usersInRoom = 0;
-
-                }
-                else
-                {
-                    valorAleatorio = new Random().Next(2) == 0;
-                    jogador1 = new Jogador(emailClaim.Value, baralho[0], baralho, valorAleatorio);
-
-                }
-            }
-            
         }
         finally
         {
