@@ -37,7 +37,6 @@ public class PartidaHub : Hub
             {}
 
             usersInRoom++;
-            await Clients.Group(sala.ToString()).SendAsync("JoinRoom", baralho[0] + dictionary.Count());
 
             await Groups.AddToGroupAsync(Context.ConnectionId, sala.ToString());
 
@@ -50,7 +49,7 @@ public class PartidaHub : Hub
                 list.Add(jogador2);
                 dictionary.Add(sala.ToString(), list);
 
-                
+                await Clients.Group(sala.ToString()).SendAsync("JoinRoom", dictionary[sala.ToString()][0].nome + baralho[0] +dictionary.Count());
 
                 sala++;
                 usersInRoom = 0;
