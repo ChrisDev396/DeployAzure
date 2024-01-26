@@ -2,10 +2,10 @@
 using System;
 public class Jogador
 {
-	public Jogador(string usuario, string nome, string[] baralho, bool turno)
+	public Jogador(string usuario, string[] baralho, bool turno)
 	{
         this.usuario = usuario;
-        this.nome = nome;
+        this.nome = baralho[0];
         this.baralho = baralho;
         this.turno = turno;
         getHeroi(baralho[1]);
