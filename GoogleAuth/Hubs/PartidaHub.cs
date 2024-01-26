@@ -45,9 +45,14 @@ public class PartidaHub : Hub
                 valorAleatorio = !valorAleatorio;
                 jogador2 = new Jogador(emailClaim.Value, baralho, valorAleatorio);
 
-                list.Add(jogador1);
-                list.Add(jogador2);
-                dictionary.Add(sala.ToString(), list);
+                //list.Add(jogador1);
+                //list.Add(jogador2);
+
+                List<Jogador> novaLista = new List<Jogador>();
+                novaLista.Add(jogador1);
+                novaLista.Add(jogador2);
+
+                dictionary.Add(sala.ToString(), novaLista);
 
                 await Clients.Group(sala.ToString()).SendAsync("JoinRoom", dictionary[sala.ToString()][0].nome + dictionary[sala.ToString()][1].nome+baralho[0]);
 
@@ -69,6 +74,26 @@ public class PartidaHub : Hub
 
     }
 
+
+    
+
+    public async Task GetJogadoresStatus(string roomName)
+    {
+       
+        if (dictionary.ContainsKey(roomName))
+        {
+            string[] jogadorInfo1 = { dictionary[roomName][0].nome, dictionary[roomName][0].forca.ToString(), dictionary[roomName][0].vida.ToString() };
+            string[] jogadorInfo2 = { dictionary[roomName][1].nome, dictionary[roomName][1].forca.ToString(), dictionary[roomName][1].vida.ToString() };
+
+            await Clients.Group(roomName).SendAsync("GetJogadoresStatus", jogadorInfo1, jogadorInfo2);
+        }
+        else
+        {
+            await Clients.Group(roomName).SendAsync("GetJogadoresStatus", "Sala não encontrada.");
+
+        }
+
+    }
 
     public async Task SendMessageToRoom(string roomName)
     {
@@ -100,24 +125,6 @@ public class PartidaHub : Hub
         else
         {
             await Clients.Group(roomName).SendAsync("SendMessageToRoom", "Sala não encontrada.");
-           
-        }
-        
-    }
-
-    public async Task GetJogadoresStatus(string roomName)
-    {
-       
-        if (dictionary.ContainsKey(roomName))
-        {
-            string[] jogadorInfo1 = { dictionary[roomName][0].nome, dictionary[roomName][0].forca.ToString(), dictionary[roomName][0].vida.ToString() };
-            string[] jogadorInfo2 = { dictionary[roomName][1].nome, dictionary[roomName][1].forca.ToString(), dictionary[roomName][1].vida.ToString() };
-
-            await Clients.Group(roomName).SendAsync("GetJogadoresStatus", jogadorInfo1, jogadorInfo2);
-        }
-        else
-        {
-            await Clients.Group(roomName).SendAsync("GetJogadoresStatus", "Sala não encontrada.");
 
         }
 
