@@ -15,12 +15,10 @@ public class PartidaHub : Hub
     private static int sala = 1;
     private static SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
 
-    private static Jogador jogador1;
-    private static Jogador jogador2;
+    private Jogador jogador1;
+    private Jogador jogador2;
 
     private static Dictionary<string, List<Jogador>> dictionary = new Dictionary<string, List<Jogador>>();
-
-    private static List<Jogador> list = new List<Jogador>();
 
     private static bool valorAleatorio = false;
 
@@ -44,9 +42,6 @@ public class PartidaHub : Hub
             {
                 valorAleatorio = !valorAleatorio;
                 jogador2 = new Jogador(emailClaim.Value, baralho, valorAleatorio);
-
-                //list.Add(jogador1);
-                //list.Add(jogador2);
 
                 List<Jogador> novaLista = new List<Jogador>
                 {
@@ -75,17 +70,14 @@ public class PartidaHub : Hub
         }
 
     }
-
-
     
-
     public async Task GetJogadoresStatus(string roomName)
     {
        
         if (dictionary.ContainsKey(roomName))
         {
-            string[] jogadorInfo1 = { dictionary[roomName][0].nome, dictionary[roomName][0].forca.ToString(), dictionary[roomName][0].vida.ToString() , dictionary[roomName][0].heroi };
-            string[] jogadorInfo2 = { dictionary[roomName][1].nome, dictionary[roomName][1].forca.ToString(), dictionary[roomName][1].vida.ToString(), dictionary[roomName][1].heroi };
+            string[] jogadorInfo1 = { dictionary[roomName][0].nome, dictionary[roomName][0].forca.ToString(), dictionary[roomName][0].vida.ToString() , dictionary[roomName][0].heroi, dictionary[roomName][0].turno.ToString() };
+            string[] jogadorInfo2 = { dictionary[roomName][1].nome, dictionary[roomName][1].forca.ToString(), dictionary[roomName][1].vida.ToString(), dictionary[roomName][1].heroi, dictionary[roomName][1].turno.ToString() };
             await Clients.Group(roomName).SendAsync("GetJogadoresStatus", jogadorInfo1, jogadorInfo2);
         }
         else
