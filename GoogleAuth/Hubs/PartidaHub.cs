@@ -48,9 +48,11 @@ public class PartidaHub : Hub
                 //list.Add(jogador1);
                 //list.Add(jogador2);
 
-                List<Jogador> novaLista = new List<Jogador>();
-                novaLista.Add(jogador1);
-                novaLista.Add(jogador2);
+                List<Jogador> novaLista = new List<Jogador>
+                {
+                    jogador1,
+                    jogador2
+                };
 
                 dictionary.Add(sala.ToString(), novaLista);
 
