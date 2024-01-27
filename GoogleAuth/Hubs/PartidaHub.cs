@@ -106,7 +106,7 @@ public class PartidaHub : Hub
             dictionary[roomName][0].turno = !dictionary[roomName][0].turno;
             dictionary[roomName][1].turno = !dictionary[roomName][1].turno;
 
-            await GetJogadoresStatus(roomName);
+            //await GetJogadoresStatus(roomName);
         }
 
     }
