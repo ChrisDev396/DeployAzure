@@ -96,11 +96,15 @@ public class PartidaHub : Hub
             if (dictionary[roomName][0].turno)
             {
                 dictionary[roomName][1].vida = dictionary[roomName][1].vida - dictionary[roomName][0].forca;
+                
             }
             else if (dictionary[roomName][1].turno)
             {
                 dictionary[roomName][0].vida = dictionary[roomName][0].vida - dictionary[roomName][1].forca;
             }
+
+            dictionary[roomName][0].turno = !dictionary[roomName][0].turno;
+            dictionary[roomName][1].turno = !dictionary[roomName][1].turno;
 
             string[] jogadorInfo1 = { dictionary[roomName][0].nome, dictionary[roomName][0].forca.ToString(), dictionary[roomName][0].vida.ToString(), dictionary[roomName][0].heroi, dictionary[roomName][0].turno.ToString() };
             string[] jogadorInfo2 = { dictionary[roomName][1].nome, dictionary[roomName][1].forca.ToString(), dictionary[roomName][1].vida.ToString(), dictionary[roomName][1].heroi, dictionary[roomName][1].turno.ToString() };
