@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Threading;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Newtonsoft.Json.Linq;
 
 [Authorize]
@@ -83,6 +84,25 @@ public class PartidaHub : Hub
         else
         {
             await Clients.Group(roomName).SendAsync("GetJogadoresStatus", "Sala não encontrada.");
+        }
+
+    }
+
+    public async Task Atacar(string roomName)
+    {
+
+        if (dictionary.ContainsKey(roomName))
+        {
+            if (dictionary[roomName][0].turno)
+            {
+                dictionary[roomName][1].vida = dictionary[roomName][1].vida - dictionary[roomName][0].forca;
+            }
+            else if (dictionary[roomName][1].turno)
+            {
+                dictionary[roomName][0].vida = dictionary[roomName][0].vida - dictionary[roomName][1].forca;
+            }
+
+            await GetJogadoresStatus(roomName);
         }
 
     }
