@@ -102,7 +102,7 @@ public class PartidaHub : Hub
                 dictionary[roomName][0].vida = dictionary[roomName][0].vida - dictionary[roomName][1].forca;
             }
 
-            await GetJogadoresStatus(roomName);
+            GetJogadoresStatus(roomName);
         }
 
     }
