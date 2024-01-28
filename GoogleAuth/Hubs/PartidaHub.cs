@@ -90,21 +90,14 @@ public class PartidaHub : Hub
 
     public async Task Atacar(string roomName)
     {
-
-        if (dictionary.ContainsKey(roomName))
+        if (dictionary.ContainsKey(roomName) && dictionary[roomName].Count == 2)
         {
-            if (dictionary[roomName][0].turno)
-            {
-                dictionary[roomName][1].vida = dictionary[roomName][1].vida - dictionary[roomName][0].forca;
-                
-            }
-            else if (dictionary[roomName][1].turno)
-            {
-                dictionary[roomName][0].vida = dictionary[roomName][0].vida - dictionary[roomName][1].forca;
-            }
+            Jogador atacante = dictionary[roomName][0];
+            Jogador alvo = dictionary[roomName][1];
 
-            dictionary[roomName][0].turno = !dictionary[roomName][0].turno;
-            dictionary[roomName][1].turno = !dictionary[roomName][1].turno;
+            alvo.vida -= atacante.forca;
+            atacante.turno = false;
+            alvo.turno = true;
 
             await GetJogadoresStatus(roomName);
         }
