@@ -93,20 +93,20 @@ public class PartidaHub : Hub
 
         if (dictionary.ContainsKey(roomName))
         {
-            //if (dictionary[roomName][0].turno)
-            //{
-            //    dictionary[roomName][1].vida = dictionary[roomName][1].vida - dictionary[roomName][0].forca;
+            if (dictionary[roomName][0].turno)
+            {
+                dictionary[roomName][1].vida = dictionary[roomName][1].vida - dictionary[roomName][0].forca;
 
-            //}
-            //else 
-            //{
-            //    dictionary[roomName][0].vida = dictionary[roomName][0].vida - dictionary[roomName][1].forca;
-            //}
+            }
+            else
+            {
+                dictionary[roomName][0].vida = dictionary[roomName][0].vida - dictionary[roomName][1].forca;
+            }
 
-            //dictionary[roomName][0].turno = !dictionary[roomName][0].turno;
-            //dictionary[roomName][1].turno = !dictionary[roomName][1].turno;
-            dictionary[roomName][1].vida = dictionary[roomName][1].vida - dictionary[roomName][0].forca;
-            dictionary[roomName][0].vida = dictionary[roomName][0].vida - dictionary[roomName][1].forca;
+            dictionary[roomName][0].turno = !dictionary[roomName][0].turno;
+            dictionary[roomName][1].turno = !dictionary[roomName][1].turno;
+            //dictionary[roomName][1].vida = dictionary[roomName][1].vida - dictionary[roomName][0].forca;
+            //dictionary[roomName][0].vida = dictionary[roomName][0].vida - dictionary[roomName][1].forca;
 
             await GetJogadoresStatus(roomName);
         }
