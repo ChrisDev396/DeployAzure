@@ -98,7 +98,7 @@ public class PartidaHub : Hub
                 dictionary[roomName][1].vida = dictionary[roomName][1].vida - dictionary[roomName][0].forca;
                 
             }
-            else if (dictionary[roomName][1].turno)
+            else 
             {
                 dictionary[roomName][0].vida = dictionary[roomName][0].vida - dictionary[roomName][1].forca;
             }
