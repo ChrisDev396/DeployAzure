@@ -25,10 +25,10 @@ public class PartidaHub : Hub
 
     public async Task JoinRoom(string[] baralho)
     {
-        await _semaphore.WaitAsync();
+        //await _semaphore.WaitAsync();
 
-        try
-        {
+        //try
+        //{
             var claims = Context.User.Claims;
             var emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email);
 
@@ -64,11 +64,11 @@ public class PartidaHub : Hub
                 jogador1 = new Jogador(emailClaim.Value, baralho, valorAleatorio);
 
             }
-        }
-        finally
-        {
-            _semaphore.Release();
-        }
+        //}
+        //finally
+        //{
+        //    _semaphore.Release();
+        //}
 
     }
     
