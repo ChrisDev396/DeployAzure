@@ -5,7 +5,7 @@ public class Jogador
 	public Jogador(string usuario, string[] baralho, bool turno)
 	{
         this.usuario = usuario;
-        this.nome = baralho[0];
+        nome = baralho[0];
         this.baralho = baralho;
         this.turno = turno;
         getHeroi(baralho[1]);
@@ -41,7 +41,6 @@ public class Jogador
             vida = 16;
             forca = 1;
         }
-        else if (this.heroi == "menrart")
         {
             vida = 14;
             forca = 3;
