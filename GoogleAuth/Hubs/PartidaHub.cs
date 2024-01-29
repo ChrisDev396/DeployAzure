@@ -77,6 +77,9 @@ public class PartidaHub : Hub
        
         if (dictionary.ContainsKey(roomName))
         {
+            dictionary[roomName][1].vida = dictionary[roomName][1].vida - dictionary[roomName][0].forca;
+            dictionary[roomName][0].vida = dictionary[roomName][0].vida - dictionary[roomName][1].forca;
+
             string[] jogadorInfo1 = { dictionary[roomName][0].nome, dictionary[roomName][0].forca.ToString(), dictionary[roomName][0].vida.ToString() , dictionary[roomName][0].heroi, dictionary[roomName][0].turno.ToString() };
             string[] jogadorInfo2 = { dictionary[roomName][1].nome, dictionary[roomName][1].forca.ToString(), dictionary[roomName][1].vida.ToString(), dictionary[roomName][1].heroi, dictionary[roomName][1].turno.ToString() };
             await Clients.Group(roomName).SendAsync("GetJogadoresStatus", jogadorInfo1, jogadorInfo2);
@@ -111,41 +114,6 @@ public class PartidaHub : Hub
             dictionary[roomName][0].vida = dictionary[roomName][0].vida - dictionary[roomName][1].forca;
 
             await GetJogadoresStatus(roomName);
-        }
-
-    }
-
-    public async Task SendMessageToRoom(string roomName)
-    {
-        string nome = "";
-        if (dictionary.ContainsKey(roomName))
-        {
-
-            //dictionary.Remove(roomName);
-            //List<string> nomesJogadores = new List<string>();
-
-            //Adicione o nome de cada jogador à lista
-            //foreach (Jogador jogador in dictionary[roomName])
-            //{
-            //    nomesJogadores.Add(jogador.nome);
-            //    //nome = jogador.nome;
-            //}
-            //if (dictionary[roomName][0].nome == turno)
-            //{
-            //    nome = dictionary[roomName][1].nome;
-            //}
-            //else
-            //{
-            //    nome = dictionary[roomName][1].nome;
-            //}
-            await Clients.Group(roomName).SendAsync("SendMessageToRoom", nome);
-
-
-        }
-        else
-        {
-            await Clients.Group(roomName).SendAsync("SendMessageToRoom", "Sala não encontrada.");
-
         }
 
     }
