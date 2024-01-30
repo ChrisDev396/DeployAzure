@@ -77,7 +77,7 @@ public class PartidaHub : Hub
        
         if (dictionary.ContainsKey(roomName))
         {
-            //dictionary[roomName][1].vida -= dictionary[roomName][0].forca;
+            dictionary[roomName][1].vida -= dictionary[roomName][0].forca;
             //dictionary[roomName][0].vida -= dictionary[roomName][1].forca;
 
             string jogadorInfo1 = dictionary[roomName][0].nome+dictionary[roomName][0].forca.ToString()+ dictionary[roomName][0].vida.ToString()+dictionary[roomName][0].heroi+dictionary[roomName][0].turno.ToString();
