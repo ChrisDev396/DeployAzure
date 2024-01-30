@@ -77,19 +77,6 @@ public class PartidaHub : Hub
 
         if (dictionary.ContainsKey(roomName))
         {
-            if (dictionary[roomName][0].turno)
-            {
-                dictionary[roomName][1].vida -= dictionary[roomName][0].forca;
-            }
-            else
-            {
-                dictionary[roomName][0].vida -= dictionary[roomName][1].forca;
-            }
-
-
-            dictionary[roomName][1].turno = !dictionary[roomName][1].turno;
-            dictionary[roomName][0].turno = !dictionary[roomName][0].turno;
-
 
             string[] jogadorInfo1 = { dictionary[roomName][0].nome, dictionary[roomName][0].forca.ToString(), dictionary[roomName][0].vida.ToString(), dictionary[roomName][0].heroi, dictionary[roomName][0].turno.ToString() };
 
@@ -105,20 +92,16 @@ public class PartidaHub : Hub
 
         if (dictionary.ContainsKey(roomName))
         {
-            //if (dictionary[roomName][0].turno)
-            //{
-            //    dictionary[roomName][1].vida = dictionary[roomName][1].vida - dictionary[roomName][0].forca;
-            //    dictionary[roomName][0].turno = false;
-            //    dictionary[roomName][1].turno = true;
-            //}
-            //else
-            //{
-            //    dictionary[roomName][0].vida = dictionary[roomName][0].vida - dictionary[roomName][1].forca;
-            //    dictionary[roomName][0].turno = true;
-            //    dictionary[roomName][1].turno = false;
-            //}
+            if (dictionary[roomName][0].turno)
+            {
+                dictionary[roomName][1].vida -= dictionary[roomName][0].forca;
+            }
+            else
+            {
+                dictionary[roomName][0].vida -= dictionary[roomName][1].forca;
+            }
 
-            
+
             dictionary[roomName][1].vida = dictionary[roomName][1].vida - dictionary[roomName][0].forca;
             dictionary[roomName][0].vida = dictionary[roomName][0].vida - dictionary[roomName][1].forca;
 
