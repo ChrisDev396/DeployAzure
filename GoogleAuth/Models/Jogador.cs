@@ -11,7 +11,6 @@ public class Jogador
         getHeroi(baralho[1]);
     }
 
-    //public string sala { get; set; }
     public bool turno { get; set; }
     public string usuario { get; set; }
     public string nome { get; set; }
@@ -21,6 +20,7 @@ public class Jogador
     public int vida { get; set; }
     public int forca { get; set; }
     public bool talento = false;
+    public int jogadas = 1;
     //public string mob = "";
 
     public void getHeroi(string heroi)
@@ -93,33 +93,6 @@ public class Jogador
             {
 
             }
-        }
-    }
-
-    public void usarTalento(int talento)
-    {
-        if (nome == "brutaniuz")
-        {
-           if (talento == 1)
-           {
-
-           }
-           else if (talento == 2)
-           {  
-
-           }
-        }
-        else if (nome == "tecnita")
-        {
-            
-        }
-        else if (nome == "ariedam")
-        {
-            
-        }
-        else if (nome == "menrart")
-        {
-           
         }
     }
 
