@@ -21,6 +21,7 @@ public class Jogador
     public int vida { get; set; }
     public int forca { get; set; }
     public bool talento = false;
+    //public string mob = "";
 
     public void getHeroi(string heroi)
     {

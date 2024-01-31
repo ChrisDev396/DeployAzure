@@ -25,10 +25,10 @@ public class PartidaHub : Hub
 
     public async Task JoinRoom(string[] baralho)
     {
-        //await _semaphore.WaitAsync();
+        await _semaphore.WaitAsync();
 
-        //try
-        //{
+        try
+        {
             var claims = Context.User.Claims;
             var emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email);
 
@@ -64,11 +64,11 @@ public class PartidaHub : Hub
                 jogador1 = new Jogador(emailClaim.Value, baralho, valorAleatorio);
 
             }
-        //}
-        //finally
-        //{
-        //    _semaphore.Release();
-        //}
+        }
+        finally
+        {
+            _semaphore.Release();
+        }
 
     }
     
@@ -102,8 +102,28 @@ public class PartidaHub : Hub
             }
 
 
-            dictionary[roomName][0].turno = !dictionary[roomName][0].turno;
-            dictionary[roomName][1].turno = !dictionary[roomName][1].turno;
+            //dictionary[roomName][0].turno = !dictionary[roomName][0].turno;
+            //dictionary[roomName][1].turno = !dictionary[roomName][1].turno;
+
+            await GetJogadoresStatus(roomName);
+        }
+
+    }
+
+    public async Task CartaGenerica(string roomName, string carta)
+    {
+
+        if (dictionary.ContainsKey(roomName))
+        {
+            if (dictionary[roomName][0].turno)
+            {
+                Generica.usarGenerica(carta, dictionary[roomName][0], dictionary[roomName][1]);
+
+            }
+            else
+            {
+                Generica.usarGenerica(carta, dictionary[roomName][1], dictionary[roomName][0]);
+            }
 
             await GetJogadoresStatus(roomName);
         }
@@ -116,14 +136,5 @@ public class PartidaHub : Hub
         await base.OnDisconnectedAsync(exception);
     }
 
-    
-    //if (jogadores.ContainsKey(chaveASerRemovida))
-    //{
     //    jogadores.Remove(chaveASerRemovida);
-    //    Console.WriteLine($"Chave {chaveASerRemovida} removida do cache.");
-    //}
-    //else
-    //{
-    //    Console.WriteLine($"Chave {chaveASerRemovida} não encontrada no cache.");
-    //}
 }
