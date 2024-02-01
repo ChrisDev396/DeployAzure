@@ -95,15 +95,17 @@ public class PartidaHub : Hub
             if (dictionary[roomName][0].turno)
             {
                 dictionary[roomName][1].vida -= dictionary[roomName][0].forca;
-                dictionary[roomName][0].jogadas -= 1;
-                CartaMestre.passarTurno(dictionary[roomName][0], dictionary[roomName][1]);
+                //dictionary[roomName][0].jogadas -= 1;
+                //CartaMestre.passarTurno(dictionary[roomName][0], dictionary[roomName][1]);
             }
             else
             {
                 dictionary[roomName][0].vida -= dictionary[roomName][1].forca;
-                dictionary[roomName][1].jogadas -= 1;
-                CartaMestre.passarTurno(dictionary[roomName][1], dictionary[roomName][0]);
+                //dictionary[roomName][1].jogadas -= 1;
+                //CartaMestre.passarTurno(dictionary[roomName][1], dictionary[roomName][0]);
             }
+            dictionary[roomName][0].turno = !dictionary[roomName][0].turno;
+            dictionary[roomName][1].turno = !dictionary[roomName][1].turno;
             await GetJogadoresStatus(roomName);
         }
 
