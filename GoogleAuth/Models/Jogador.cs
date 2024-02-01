@@ -22,6 +22,7 @@ public class Jogador
     public bool talento = false;
     public int jogadas = 1;
     //public string mob = "";
+    public List<CartaItem> itemAtivo;
 
     public void getHeroi(string heroi)
     {
@@ -42,57 +43,10 @@ public class Jogador
             vida = 16;
             forca = 1;
         }
+        else if (this.heroi == "menrart")
         {
             vida = 14;
             forca = 3;
-        }
-    }
-
-    public void usarPassiva(int passiva)
-    {
-        if (heroi == "brutaniuz")
-        {
-            if (passiva == 1)
-            {
-
-            }
-            else if (passiva == 2)
-            {
-
-            }
-        }
-        else if (nome == "tecnita")
-        {
-            if (passiva == 1)
-            {
-
-            }
-            else if (passiva == 2)
-            {
-
-            }
-        }
-        else if (nome == "ariedam")
-        {
-            if (passiva == 1)
-            {
-
-            }
-            else if (passiva == 2)
-            {
-
-            }
-        }
-        else if (nome == "menrart")
-        {
-            if (passiva == 1)
-            {
-
-            }
-            else if (passiva == 2)
-            {
-
-            }
         }
     }
 
