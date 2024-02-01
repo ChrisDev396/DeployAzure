@@ -104,10 +104,6 @@ public class PartidaHub : Hub
                 dictionary[roomName][1].jogadas -= 1;
                 CartaMestre.passarTurno(dictionary[roomName][1], dictionary[roomName][0]);
             }
-
-            
-            //
-
             await GetJogadoresStatus(roomName);
         }
 
@@ -115,17 +111,26 @@ public class PartidaHub : Hub
 
     public async Task CartaGenerica(string roomName, string carta)
     {
+        var claims = Context.User.Claims;
+        var emailClaim = claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email);
 
+        if (emailClaim.Value != null)
+        { }
         if (dictionary.ContainsKey(roomName))
         {
             if (dictionary[roomName][0].turno)
             {
-                Generica.usarGenerica(carta, dictionary[roomName][0], dictionary[roomName][1]);
-
+                if (dictionary[roomName][0].usuario == emailClaim.Value)
+                {
+                    CartaItem.Item(carta, dictionary[roomName][0], dictionary[roomName][1]);
+                }
             }
             else
             {
-                Generica.usarGenerica(carta, dictionary[roomName][1], dictionary[roomName][0]);
+                if (dictionary[roomName][1].usuario == emailClaim.Value)
+                {
+                    CartaItem.Item(carta, dictionary[roomName][1], dictionary[roomName][0]);
+                }
             }
 
             await GetJogadoresStatus(roomName);

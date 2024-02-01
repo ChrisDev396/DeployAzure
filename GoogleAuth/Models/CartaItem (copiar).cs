@@ -1,7 +1,7 @@
 ﻿using System;
-public class Generica
+public class CartaItem
 {
-	public static void usarGenerica(string carta, Jogador sender, Jogador receiver)
+	public static void Item(string carta, Jogador sender, Jogador receiver)
 	{
 		if(carta == "item1")
 		{

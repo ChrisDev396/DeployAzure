@@ -44,5 +44,6 @@
     <Compile Remove="Migrations\20231031060044_NomeDaMigracao.cs" />
     <Compile Remove="Migrations\20231031060044_NomeDaMigracao.Designer.cs" />
     <Compile Remove="Models\Loja.cs" />
+    <Compile Remove="Models\CartaItem %28copiar%29.cs" />
   </ItemGroup>
 </Project>

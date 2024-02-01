@@ -10,6 +10,8 @@ public class CartaMestre
             receiver.turno = !receiver.turno;
         }
     }
+
+
 }
 
 
