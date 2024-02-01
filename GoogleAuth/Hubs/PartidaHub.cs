@@ -106,7 +106,13 @@ public class PartidaHub : Hub
             }
             dictionary[roomName][0].turno = !dictionary[roomName][0].turno;
             dictionary[roomName][1].turno = !dictionary[roomName][1].turno;
+
             await GetJogadoresStatus(roomName);
+
+            if (CartaMestre.Resultado(dictionary[roomName][0], dictionary[roomName][1]))
+            {
+                dictionary.Remove(roomName);
+            }
         }
 
     }
@@ -145,6 +151,4 @@ public class PartidaHub : Hub
 
         await base.OnDisconnectedAsync(exception);
     }
-
-    //    jogadores.Remove(chaveASerRemovida);
 }

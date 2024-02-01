@@ -2,7 +2,7 @@
 
 public class CartaMestre
 {
-    public static void passarTurno(Jogador sender, Jogador receiver)
+    public static void PassarTurno(Jogador sender, Jogador receiver)
     {
         if (sender.jogadas == 0)
         {
@@ -11,7 +11,18 @@ public class CartaMestre
         }
     }
 
-
+    public static bool Resultado(Jogador jogador1, Jogador jogador2)
+    {
+        if (jogador1.vida <= 0)
+        {
+            return true;
+        }
+        else if (jogador2.vida <= 0)
+        {
+            return true;
+        }
+        return false;
+    }
 }
 
 
