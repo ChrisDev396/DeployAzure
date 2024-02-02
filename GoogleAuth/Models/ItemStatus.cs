@@ -4,9 +4,7 @@ public class ItemStatus
     public ItemStatus(string nome/*, string tipo, int vida, int forca*/)
     {
         this.nome = nome;
-        //this.tipo = tipo;
-        //this.vida = vida;
-        //this.forca = forca;
+
         if (nome == "item1")
         {
             tipo = "ativo";
