@@ -71,22 +71,32 @@ public class PartidaHub : Hub
         }
 
     }
-    
+
     public async Task GetJogadoresStatus(string roomName)
     {
 
         if (dictionary.ContainsKey(roomName))
         {
+            List<string[]> itensJogador1 = new List<string[]>();
+            foreach (ItemStatus item in dictionary[roomName][0].itemStatus)
+            {
+                itensJogador1.Add(new string[] { item.nome, item.forca.ToString(), item.vida.ToString() });
+            }
+
+            List<string[]> itensJogador2 = new List<string[]>();
+            foreach (ItemStatus item in dictionary[roomName][1].itemStatus)
+            {
+                itensJogador2.Add(new string[] { item.nome, item.forca.ToString(), item.vida.ToString() });
+            }
 
             string[] jogadorInfo1 = { dictionary[roomName][0].nome, dictionary[roomName][0].forca.ToString(), dictionary[roomName][0].vida.ToString(), dictionary[roomName][0].heroi, dictionary[roomName][0].turno.ToString() };
 
             string[] jogadorInfo2 = { dictionary[roomName][1].nome, dictionary[roomName][1].forca.ToString(), dictionary[roomName][1].vida.ToString(), dictionary[roomName][1].heroi, dictionary[roomName][1].turno.ToString() };
 
-            await Clients.Group(roomName).SendAsync("GetJogadoresStatus", jogadorInfo1, jogadorInfo2);
+            await Clients.Group(roomName).SendAsync("GetJogadoresStatus", jogadorInfo1, jogadorInfo2, itensJogador1, itensJogador2);
+
         }
-
     }
-
     public async Task Atacar(string roomName)
     {
 
