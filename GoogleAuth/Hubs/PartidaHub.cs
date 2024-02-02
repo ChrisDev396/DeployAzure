@@ -77,16 +77,22 @@ public class PartidaHub : Hub
 
         if (dictionary.ContainsKey(roomName))
         {
-            List<string[]> itensJogador1 = new List<string[]>();
+            List<string> itensJogador1 = new List<string>();
             foreach (ItemStatus item in dictionary[roomName][0].itemStatus)
             {
-                itensJogador1.Add(new string[] { item.nome, item.forca.ToString(), item.vida.ToString() });
+                if (item.nome is not null)
+                {
+                    string carta = item.nome + "/"+item.tipo + "/"+item.forca + "/"+item.vida;
+                    itensJogador1.Add(carta);
+                }
+                
             }
 
-            List<string[]> itensJogador2 = new List<string[]>();
+            List<string> itensJogador2 = new List<string>();
             foreach (ItemStatus item in dictionary[roomName][1].itemStatus)
             {
-                itensJogador2.Add(new string[] { item.nome, item.forca.ToString(), item.vida.ToString() });
+                string carta = item.nome + "/" + item.tipo + "/" + item.forca + "/" + item.vida;
+                itensJogador1.Add(carta);
             }
 
             string[] jogadorInfo1 = { dictionary[roomName][0].nome, dictionary[roomName][0].forca.ToString(), dictionary[roomName][0].vida.ToString(), dictionary[roomName][0].heroi, dictionary[roomName][0].turno.ToString() };
