@@ -77,44 +77,30 @@ public class PartidaHub : Hub
 
         if (dictionary.ContainsKey(roomName))
         {
-            List<string> itensJogador1 = new List<string>();
-            foreach (ItemStatus item in dictionary[roomName][0].itemStatus)
-            {
-                string carta;
-                if (item.nome is null)
-                {
-                    carta = "vazio";
-                }
-                else
-                {
-                    carta = item.nome + "/" + item.tipo + "/" + item.forca + "/" + item.vida;
-                }
+            //List<string> itensJogador1 = new List<string>();
+            //foreach (ItemStatus item in dictionary[roomName][0].itemStatus)
+            //{
+            //    string carta;
+            //    if (item.nome is null)
+            //    {
+            //        carta = "vazio";
+            //    }
+            //    else
+            //    {
+            //        carta = item.nome + "/" + item.tipo + "/" + item.forca + "/" + item.vida;
+            //    }
 
-                itensJogador1.Add(carta);
-            }
+            //    itensJogador1.Add(carta);
+            //}
 
-            List<string> itensJogador2 = new List<string>();
-            foreach (ItemStatus item in dictionary[roomName][1].itemStatus)
-            {
-                string carta;
-                if (item.nome is null)
-                {
-                    carta = "vazio";
-                }
-                else
-                {
-                    carta = item.nome + "/" + item.tipo + "/" + item.forca + "/" + item.vida;
-                }
-                
-                itensJogador2.Add(carta);
-            }
 
             string[] jogadorInfo1 = { dictionary[roomName][0].nome, dictionary[roomName][0].forca.ToString(), dictionary[roomName][0].vida.ToString(), dictionary[roomName][0].heroi, dictionary[roomName][0].turno.ToString() };
 
             string[] jogadorInfo2 = { dictionary[roomName][1].nome, dictionary[roomName][1].forca.ToString(), dictionary[roomName][1].vida.ToString(), dictionary[roomName][1].heroi, dictionary[roomName][1].turno.ToString() };
 
+            string[] itens1 = { dictionary[roomName][0].itemStatus[0].vida.ToString() };
             //await Clients.Group(roomName).SendAsync("GetJogadoresStatus", jogadorInfo1, jogadorInfo2, itensJogador1.ToArray(), itensJogador2.ToArray());
-            await Clients.Group(roomName).SendAsync("GetJogadoresStatus", jogadorInfo1, jogadorInfo2);
+            await Clients.Group(roomName).SendAsync("GetJogadoresStatus", jogadorInfo1, jogadorInfo2, itens1);
 
         }
     }
