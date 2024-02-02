@@ -8,7 +8,8 @@ public class Jogador
         nome = baralho[0];
         this.baralho = baralho;
         this.turno = turno;
-        getHeroi(baralho[1]);
+        this.heroi = baralho[1];
+        CartaMestre.GetHeroi(heroi,vida,forca);
     }
 
     public bool turno { get; set; }
@@ -20,35 +21,12 @@ public class Jogador
     public int vida { get; set; }
     public int forca { get; set; }
     public bool talento = false;
+    public int countJogadas = 1;
     public int jogadas = 1;
     //public string mob = "";
-    public List<CartaItem> itemAtivo;
+    //public List<CartaItem> itemAtivo;
 
-    public void getHeroi(string heroi)
-    {
-        this.heroi = heroi;
 
-        if (this.heroi == "brutaniuz")
-        {
-            vida = 15;
-            forca = 3;
-        }
-        else if (this.heroi == "tecnita")
-        {
-            vida = 14;
-            forca = 2;
-        }
-        else if (this.heroi == "ariedam")
-        {
-            vida = 16;
-            forca = 1;
-        }
-        else if (this.heroi == "menrart")
-        {
-            vida = 14;
-            forca = 3;
-        }
-    }
 
 }
 
