@@ -3,30 +3,7 @@
 public class CartaMestre
 {
 
-    public static void GetHeroi(string heroi,int vida, int forca)
-    {
-
-        if (heroi == "brutaniuz")
-        {
-            vida = 15;
-            forca = 3;
-        }
-        else if (heroi == "tecnita")
-        {
-            vida = 14;
-            forca = 2;
-        }
-        else if (heroi == "ariedam")
-        {
-            vida = 16;
-            forca = 1;
-        }
-        else if (heroi == "menrart")
-        {
-            vida = 14;
-            forca = 3;
-        }
-    }
+    
         public static void PassarTurno(Jogador sender, Jogador receiver)
     {
         if (sender.jogadas == 0)

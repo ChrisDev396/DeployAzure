@@ -1,14 +1,16 @@
 ﻿using System;
-public class CartaItemAtivo
+public class ItemStatus
 {
-    public CartaItemAtivo(string nome, int vida, int forca)
+    public ItemStatus(string nome, string tipo, int vida, int forca)
     {
         this.nome = nome;
+        this.tipo = tipo;
         this.vida = vida;
         this.forca = forca;
     }
 
 	public string nome { get; set; }
+    public string tipo { get; set; }
     public int vida { get; set; }
     public int forca { get; set; }
 }
