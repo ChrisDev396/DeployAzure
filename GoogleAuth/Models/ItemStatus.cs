@@ -23,6 +23,18 @@ public class ItemStatus
             forca = 1;
             vida = 2;
         }
+        else if (nome == "item4")
+        {
+            tipo = "ativo-passiva";
+            forca = 2;
+            vida = 2;
+        }
+        else if (nome == "item5")
+        {
+            tipo = "passiva";
+            forca = 3;
+            vida = 2;
+        }
     }
 
 	public string nome { get; set; }

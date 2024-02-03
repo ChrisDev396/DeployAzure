@@ -12,11 +12,14 @@ public class Jogador
 
         GetHeroi(heroi);
 
-        //for (int i = 2; i < 7; i++)
-        //{
-        //    itemStatus.Add(new ItemStatus(baralho[i]));
-        //}
         
+        itemStatus.Add(new ItemStatus(baralho[2]));
+        itemStatus.Add(new ItemStatus(baralho[3]));
+        itemStatus.Add(new ItemStatus(baralho[4]));
+        itemStatus.Add(new ItemStatus(baralho[5]));
+        itemStatus.Add(new ItemStatus(baralho[6]));
+
+
     }
 
     public bool turno { get; set; }
@@ -34,7 +37,7 @@ public class Jogador
 
     //public string mob = "";
 
-    //public List<ItemStatus> itemStatus {get;set;}
+    public List<ItemStatus> itemStatus {get;set;}
 
     public void GetHeroi(string heroi)
     {
