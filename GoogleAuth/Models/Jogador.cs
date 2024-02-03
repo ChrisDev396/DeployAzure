@@ -13,11 +13,11 @@ public class Jogador
         GetHeroi(heroi);
 
         
-        itemStatus.Add(new ItemStatus(baralho[2]));
-        itemStatus.Add(new ItemStatus(baralho[3]));
-        itemStatus.Add(new ItemStatus(baralho[4]));
-        itemStatus.Add(new ItemStatus(baralho[5]));
-        itemStatus.Add(new ItemStatus(baralho[6]));
+        //itemStatus.Add(new ItemStatus(baralho[2]));
+        //itemStatus.Add(new ItemStatus(baralho[3]));
+        //itemStatus.Add(new ItemStatus(baralho[4]));
+        //itemStatus.Add(new ItemStatus(baralho[5]));
+        //itemStatus.Add(new ItemStatus(baralho[6]));
 
 
     }
