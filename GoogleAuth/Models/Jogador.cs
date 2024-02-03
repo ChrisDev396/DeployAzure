@@ -11,7 +11,7 @@ public class Jogador
         //this.heroi = baralho[1];
 
         // GetHeroi(heroi);
-        itemStatus.Add(new ItemStatus(baralho[1]));
+        //itemStatus.Add(new ItemStatus(baralho[1]));
     }
 
     public bool turno { get; set; }
