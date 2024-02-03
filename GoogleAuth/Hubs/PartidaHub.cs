@@ -81,7 +81,7 @@ public class PartidaHub : Hub
             foreach (ItemStatus item in dictionary[roomName][0].itemStatus)
             {
                 string carta;
-                if (item.nome is null)
+                if (string.IsNullOrEmpty(item.nome))
                 {
                     carta = "vazio";
                 }

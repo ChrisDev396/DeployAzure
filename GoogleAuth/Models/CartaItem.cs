@@ -1,11 +1,6 @@
 ﻿using System;
 public class CartaItem
 {
-
-	public int vida = 0;
-	public int forca = 0;
-	public string tipo = "passiva";//ativo//passiva-ativo
-
     public static void Item(string carta, Jogador atacante, Jogador alvo)
 	{
 		if(carta == "item1")
