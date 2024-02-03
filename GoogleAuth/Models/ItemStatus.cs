@@ -35,6 +35,30 @@ public class ItemStatus
             forca = 3;
             vida = 2;
         }
+        else if (nome == "brutaniuz")
+        {
+            tipo = "ativo-passiva";
+            vida = 15;
+            forca = 3;
+        }
+        else if (nome == "tecnita")
+        {
+            tipo = "ativo-passiva";
+            vida = 14;
+            forca = 2;
+        }
+        else if (nome == "ariedam")
+        {
+            tipo = "ativo-passiva";
+            vida = 16;
+            forca = 1;
+        }
+        else if (nome == "menrart")
+        {
+            tipo = "ativo-passiva";
+            vida = 14;
+            forca = 3;
+        }
     }
 
 	public string nome { get; set; }

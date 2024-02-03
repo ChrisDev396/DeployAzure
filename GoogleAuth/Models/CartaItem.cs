@@ -5,16 +5,16 @@ public class CartaItem
 	{
 		if(carta == "item1")
 		{
-			atacante.forca += 1;
-            atacante.vida += 1;
+			atacante.itemStatus[0].forca += 1;
+            atacante.itemStatus[0].vida += 1;
         }
 		else if (carta == "item2")
 		{
-            alvo.vida -= atacante.forca;
+			alvo.itemStatus[0].vida -= atacante.itemStatus[0].forca;
 		}
 		else if (carta == "item3")
 		{
-			atacante.countJogadas += 1;
+			//atacante.countJogadas += 1;
 			atacante.itemStatus.Add(new ItemStatus(carta));
 		}
 	}
