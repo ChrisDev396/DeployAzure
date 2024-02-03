@@ -7,6 +7,7 @@ using System.Threading;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Linq;
 
 [Authorize]
@@ -77,46 +78,40 @@ public class PartidaHub : Hub
 
         if (dictionary.ContainsKey(roomName))
         {
-            List<string> itensJogador1 = new List<string>();
-            foreach (ItemStatus item in dictionary[roomName][0].itemStatus)
-            {
-                string carta;
-                if (string.IsNullOrEmpty(item.nome))
-                {
-                    carta = "vazio";
-                }
-                else
-                {
-                    carta = item.nome + "/" + item.tipo + "/" + item.forca.ToString() + "/" + item.vida.ToString();
-                }
+            //List<string> itensJogador1 = new List<string>();
+            //foreach (ItemStatus item in dictionary[roomName][0].itemStatus)
+            //{
+            //    //string carta;
+            //    //if (string.IsNullOrEmpty(item.nome))
+            //    //{
+            //    //    carta = "vazio";
+            //    //}
+            //    //else
+            //    //{
+            //    //    carta = item.nome + "/" + item.tipo + "/" + item.forca.ToString() + "/" + item.vida.ToString();
+            //    //}
 
-                itensJogador1.Add(carta);
-            }
+            //    //itensJogador1.Add(carta);
+            //}
 
-            List<string> itensJogador2 = new List<string>();
-            foreach (ItemStatus item in dictionary[roomName][1].itemStatus)
-            {
-                string carta;
-                if (string.IsNullOrEmpty(item.nome))
-                {
-                    carta = "vazio";
-                }
-                else
-                {
-                    carta = item.nome + "/" + item.tipo + "/" + item.forca.ToString() + "/" + item.vida.ToString();
-                }
-
-                itensJogador2.Add(carta);
-            }
-
+            
 
             string[] jogadorInfo1 = { dictionary[roomName][0].nome, dictionary[roomName][0].forca.ToString(), dictionary[roomName][0].vida.ToString(), dictionary[roomName][0].heroi, dictionary[roomName][0].turno.ToString()};
 
             string[] jogadorInfo2 = { dictionary[roomName][1].nome, dictionary[roomName][1].forca.ToString(), dictionary[roomName][1].vida.ToString(), dictionary[roomName][1].heroi, dictionary[roomName][1].turno.ToString() };
 
-          
-            await Clients.Group(roomName).SendAsync("GetJogadoresStatus", jogadorInfo1, jogadorInfo2, itensJogador1.ToArray(), itensJogador2.ToArray());
-           await Clients.Group(roomName).SendAsync("GetJogadoresStatus", jogadorInfo1, jogadorInfo2);
+            if (string.IsNullOrEmpty(dictionary[roomName][0].itemStatus[0].nome))
+            {
+                await Clients.Group(roomName).SendAsync("GetJogadoresStatus", jogadorInfo1, jogadorInfo2);
+            }
+            else
+            {
+                jogadorInfo1 = new string[] { dictionary[roomName][0].nome, dictionary[roomName][0].forca.ToString(), dictionary[roomName][0].vida.ToString(), dictionary[roomName][0].heroi, dictionary[roomName][0].turno.ToString(), dictionary[roomName][0].itemStatus[0].nome };
+
+                await Clients.Group(roomName).SendAsync("GetJogadoresStatus", jogadorInfo1, jogadorInfo2);
+            }
+
+            
 
         }
     }
