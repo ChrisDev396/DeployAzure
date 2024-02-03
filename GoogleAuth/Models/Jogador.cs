@@ -8,10 +8,11 @@ public class Jogador
         this.nome = baralho[0];
         this.baralho = baralho;
         this.turno = turno;
-        //this.heroi = baralho[1];
 
-        // GetHeroi(heroi);
-        itemStatus.Add(new ItemStatus(baralho[1]));
+        itemStatus = new List<ItemStatus>
+        {
+            new ItemStatus(baralho[0])
+        };
     }
 
     public bool turno { get; set; }
