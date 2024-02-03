@@ -53,7 +53,7 @@ public class ItemStatus
             vida = 16;
             forca = 1;
         }
-        else if (nome == "menrart")
+        else //if (nome == "menrart")
         {
             tipo = "ativo-passiva";
             vida = 14;
