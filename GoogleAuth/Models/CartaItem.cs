@@ -15,7 +15,7 @@ public class CartaItem
 		else if (carta == "item3")
 		{
 			atacante.countJogadas += 1;
-			atacante.itemStatus1 = new ItemStatus(carta);
+			atacante.itemStatus.Add(new ItemStatus(carta));
 		}
 	}
 }
