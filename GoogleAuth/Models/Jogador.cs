@@ -11,7 +11,7 @@ public class Jogador
 
         itemStatus = new List<ItemStatus>
         {
-            new ItemStatus(baralho[0])
+            new ItemStatus(baralho[1])
         };
     }
 
