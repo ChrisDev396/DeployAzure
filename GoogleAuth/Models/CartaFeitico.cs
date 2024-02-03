@@ -5,12 +5,12 @@ public class CartaFeitico
 	{
 		if(carta == "feitico1")
 		{
-            atacante.forca += 1;
-            atacante.vida += 1;
+            atacante.itemStatus[0].forca += 1;
+            atacante.itemStatus[0].vida += 1;
         }
 		else if (carta == "feitico2")
 		{
-			alvo.vida -= atacante.forca;
+			alvo.itemStatus[0].vida -= atacante.itemStatus[0].forca;
 		}
 	}
 }

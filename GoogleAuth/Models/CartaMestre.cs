@@ -15,11 +15,11 @@ public class CartaMestre
 
     public static bool Resultado(Jogador jogador1, Jogador jogador2)
     {
-        if (jogador1.vida <= 0)
+        if (jogador1.itemStatus[0].vida <= 0)
         {
             return true;
         }
-        else if (jogador2.vida <= 0)
+        else if (jogador2.itemStatus[0].vida <= 0)
         {
             return true;
         }
