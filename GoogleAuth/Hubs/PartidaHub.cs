@@ -77,40 +77,25 @@ public class PartidaHub : Hub
 
         if (dictionary.ContainsKey(roomName))
         {
-            List<string> itensJogador1 = new List<string>();
-            foreach (ItemStatus item in dictionary[roomName][0].itemStatus)
-            {
-                string carta;
-                if (string.IsNullOrEmpty(item.nome))
-                {
-                    carta = "vazio";
-                }
-                else
-                {
-                    carta = item.nome + "/" + item.tipo + "/" + item.forca.ToString() + "/" + item.vida.ToString();
-                }
+            //List<string> itensJogador1 = new List<string>();
+            //foreach (ItemStatus item in dictionary[roomName][0].itemStatus)
+            //{
+            //    string carta;
+            //    if (string.IsNullOrEmpty(item.nome))
+            //    {
+            //        carta = "vazio";
+            //    }
+            //    else
+            //    {
+            //        carta = item.nome + "/" + item.tipo + "/" + item.forca.ToString() + "/" + item.vida.ToString();
+            //    }
 
-                itensJogador1.Add(carta);
-            }
+            //    itensJogador1.Add(carta);
+            //}
 
-            List<string> itensJogador2 = new List<string>();
-            foreach (ItemStatus item in dictionary[roomName][1].itemStatus)
-            {
-                string carta;
-                if (string.IsNullOrEmpty(item.nome))
-                {
-                    carta = "vazio";
-                }
-                else
-                {
-                    carta = item.nome + "/" + item.tipo + "/" + item.forca.ToString() + "/" + item.vida.ToString();
-                }
 
-                itensJogador2.Add(carta);
-            }
-
-            string[] itens1Formatados = itensJogador1.ToArray();
-            string[] itens2Formatados = itensJogador2.ToArray();
+            string[] itens1Formatados = { dictionary[roomName][0].itemStatus1.nome + "/" + dictionary[roomName][0].itemStatus1.tipo + "/" + dictionary[roomName][0].itemStatus1.forca + "/" + dictionary[roomName][0].itemStatus1.vida};
+            string[] itens2Formatados = { dictionary[roomName][1].itemStatus1.nome + "/" + dictionary[roomName][1].itemStatus1.tipo + "/" + dictionary[roomName][1].itemStatus1.forca + "/" + dictionary[roomName][1].itemStatus1.vida };
 
             string[] jogadorInfo1 = { dictionary[roomName][0].nome, dictionary[roomName][0].forca.ToString(), dictionary[roomName][0].vida.ToString(), dictionary[roomName][0].heroi, dictionary[roomName][0].turno.ToString() };
 
