@@ -86,14 +86,14 @@ public class PartidaHub : Hub
             //    itensJogador1.Add(carta);
             //}
 
-            string[] itensJogador1 = new string[jogador2.itemStatus.Count];
+            string[] itensJogador1 = new string[dictionary[roomName][0].itemStatus.Count];
 
             for (int i = 0; i < dictionary[roomName][0].itemStatus.Count; i++)
             {
                 itensJogador1[i] = dictionary[roomName][0].itemStatus[i].ToFormattedString();
             }
 
-            string[] itensJogador2 = new string[jogador2.itemStatus.Count];
+            string[] itensJogador2 = new string[dictionary[roomName][1].itemStatus.Count];
 
             for (int i = 0; i < dictionary[roomName][1].itemStatus.Count; i++)
             {
