@@ -107,7 +107,7 @@ public class PartidaHub : Hub
             string[] jogadorInfo2 = { dictionary[roomName][1].nome, dictionary[roomName][1].turno.ToString() };
 
             
-            await Clients.Group(roomName).SendAsync("GetJogadoresStatus", jogadorInfo1, jogadorInfo2, itensJogador1, itensJogador2));
+            await Clients.Group(roomName).SendAsync("GetJogadoresStatus", jogadorInfo1, jogadorInfo2, itensJogador1, itensJogador2);
             
 
             
