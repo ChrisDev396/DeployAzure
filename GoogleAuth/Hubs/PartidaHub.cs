@@ -78,20 +78,26 @@ public class PartidaHub : Hub
 
         if (dictionary.ContainsKey(roomName))
         {
-            List<string> itensJogador1 = new List<string>();
-            foreach (ItemStatus item in dictionary[roomName][0].itemStatus)
+            //List<string> itensJogador1 = new List<string>();
+            //foreach (ItemStatus item in dictionary[roomName][0].itemStatus)
+            //{
+            //    string carta = item.nome + "/" + item.tipo + "/" + item.forca.ToString() + "/" + item.vida.ToString();
+
+            //    itensJogador1.Add(carta);
+            //}
+
+            string[] itensJogador1 = new string[jogador2.itemStatus.Count];
+
+            for (int i = 0; i < dictionary[roomName][0].itemStatus.Count; i++)
             {
-                string carta = item.nome + "/" + item.tipo + "/" + item.forca.ToString() + "/" + item.vida.ToString();
-                
-                itensJogador1.Add(carta);
+                itensJogador1[i] = dictionary[roomName][0].itemStatus[i].ToFormattedString();
             }
 
-            List<string> itensJogador2 = new List<string>();
-            foreach (ItemStatus item in dictionary[roomName][1].itemStatus)
+            string[] itensJogador2 = new string[jogador2.itemStatus.Count];
+
+            for (int i = 0; i < dictionary[roomName][1].itemStatus.Count; i++)
             {
-                string carta = item.nome + "/" + item.tipo + "/" + item.forca.ToString() + "/" + item.vida.ToString();
-                
-                itensJogador2.Add(carta);
+                itensJogador2[i] = dictionary[roomName][1].itemStatus[i].ToFormattedString();
             }
 
             //dictionary[roomName][0].forca.ToString(), dictionary[roomName][0].vida.ToString(), dictionary[roomName][0].heroi
@@ -101,7 +107,7 @@ public class PartidaHub : Hub
             string[] jogadorInfo2 = { dictionary[roomName][1].nome, dictionary[roomName][1].turno.ToString() };
 
             
-            await Clients.Group(roomName).SendAsync("GetJogadoresStatus", jogadorInfo1, jogadorInfo2, itensJogador1.ToArray(), itensJogador2.ToArray());
+            await Clients.Group(roomName).SendAsync("GetJogadoresStatus", jogadorInfo1, jogadorInfo2, itensJogador1, itensJogador2));
             
 
             

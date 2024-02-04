@@ -65,5 +65,10 @@ public class ItemStatus
     public string tipo { get; set; }
     public int vida { get; set; }
     public int forca { get; set; }
+
+    public string ToFormattedString()
+    {
+        return $"{nome}/{tipo}/{vida}/{forca}";
+    }
 }
 
