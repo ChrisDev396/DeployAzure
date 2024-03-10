@@ -10,17 +10,17 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
     <None Remove="Models\" />
-    <None Remove="Controllers\" />
     <None Remove="Context\" />
     <None Remove="Controller\" />
     <None Remove="Hubs\" />
+    <None Remove="Hubs\GameModel\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Context\" />
     <Folder Include="Controller\" />
     <Folder Include="Hubs\" />
+    <Folder Include="Hubs\GameModel\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.12" />
@@ -32,7 +32,6 @@
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Migrations\AppDbContextModelSnapshot.cs" />
     <Compile Remove="Migrations\20231026011431_GoogleAuthTeste2.Designer.cs" />
     <Compile Remove="Migrations\20231026011431_GoogleAuthTeste2.cs" />
     <Compile Remove="Migrations\20231025135311_GoogleAuthTeste.Designer.cs" />

@@ -5,7 +5,7 @@
 namespace GoogleAuth.Migrations
 {
     /// <inheritdoc />
-    public partial class NomeDaMigracao2 : Migration
+    public partial class TransacaoMigration2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -2,10 +2,12 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 [ApiController]
 [Route("[controller]")]
-[Authorize]
+//[EnableRateLimiting]
+//[Authorize]
 public class UsuarioController : ControllerBase
 {
     private readonly AppDbContext _context;
@@ -24,51 +26,49 @@ public class UsuarioController : ControllerBase
             return Ok();
         }
         return usuarios;
-        //return Ok("Sucesso");
     }
 
-    [HttpGet("{id:int}")]
+    [HttpGet("suport")]
     public ActionResult Get2()
     {
-        return Ok("Success");
+        var html = @"
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset=""UTF-8"">
+            <title>Herti Suport</title>
+        </head>
+        <body>
+            <h1>Need help?</h1>
+            <p>Contact hertisup@gmail.com</p>
+        </body>
+        </html>";
+
+        return Content(html, "text/html");
     }
 
 
-    [HttpGet("{id:int}", Name = "ObterUsuario")]
-    public ActionResult<Usuario> Get(int id)
+    [HttpGet("{id:alpha}", Name = "ObterUsuario")]
+    public ActionResult<Usuario> Get(string id)
     {
-        var usuario = _context.Usuarios.FirstOrDefault(p => p.UsuarioId == id);
+        var usuario = _context.Usuarios.FirstOrDefault(p => p.NomeUsuario == id);
         if (usuario is null)
         {
             return NotFound("Usuário não encontrado.");
         }
 
-        string token = HttpContext.Request.Headers["Authorization"].FirstOrDefault();
+        string token = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(' ')[1];
+        var emailClaim = token != null ? new JwtSecurityTokenHandler().ReadJwtToken(token).Claims.FirstOrDefault(c => c.Type == "email") : null;
 
-        if (token != null)
-        {
-            if (token.StartsWith("Bearer "))
-            {
-                token = token.Substring("Bearer ".Length);
-            }
-
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var jwtToken = tokenHandler.ReadJwtToken(token);
-
-            var emailClaim = jwtToken.Claims.FirstOrDefault(claim => claim.Type == "email");
-
-
-            if (emailClaim != null)
+        if (emailClaim != null)
             {
                 string email = emailClaim.Value;
                 if (email != usuario.Email)
                 {
-                    return BadRequest("Voce nao tem acesso a essa conta. " + usuario.Email);
+                    return BadRequest("Voce não tem acesso a essa conta. " + usuario.Email);
                 }
-
-
             }
-        }
+        
         return usuario;
     }
 
@@ -77,45 +77,39 @@ public class UsuarioController : ControllerBase
     {
         if (usuario is null)
         {
-            return BadRequest(usuario.UsuarioId);
+            return BadRequest(usuario.NomeUsuario);
         }
 
-        if (_context.Usuarios.Any(u => u.Nome == usuario.Nome))
+        if (_context.Usuarios.Any(u => u.NomeUsuario == usuario.NomeUsuario))
         {
             ModelState.AddModelError("Nome", "O nome de usuário já está em uso.");
             return BadRequest(ModelState);
         }
 
-        string token = HttpContext.Request.Headers["Authorization"].FirstOrDefault();
+        string token = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(' ')[1];
+        var emailClaim = token != null ? new JwtSecurityTokenHandler().ReadJwtToken(token).Claims.FirstOrDefault(c => c.Type == "email") : null;
 
-        if (token.StartsWith("Bearer "))
+        if (_context.Usuarios.Any(u => u.Email == emailClaim.Value))
         {
-            token = token.Substring("Bearer ".Length);
-        }
-
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var jwtToken = tokenHandler.ReadJwtToken(token);
-
-        var emailClaim = jwtToken.Claims.FirstOrDefault(claim => claim.Type == "email").Value;
-
-        if (_context.Usuarios.Any(u => u.Email == emailClaim))
-        {
-            ModelState.AddModelError("Email", "O email de usuário já está em uso.");
+            ModelState.AddModelError("Erro", "Erro no servidor");
             return BadRequest(ModelState);
         }
 
-
-        usuario.Email = emailClaim;
+        usuario.Email = emailClaim.Value;
         usuario.DataCriacao = DateTime.Now;
-
+        usuario.Partidas = 0;
+        usuario.Vitorias = 0;
+        usuario.Pontuacao = 0;
 
         _context.Usuarios.Add(usuario);
         _context.SaveChanges();
 
         return new CreatedAtRouteResult("ObterUsuario",
-            new { id = usuario.UsuarioId }, usuario);
+        new { id = usuario.NomeUsuario }, usuario);
+        //return Ok("Success");
     }
 
+    
 
 }
 

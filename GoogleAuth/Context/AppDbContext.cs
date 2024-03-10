@@ -7,5 +7,6 @@ public class AppDbContext : DbContext
 
 	public DbSet<Usuario>? Usuarios { get; set; }
 	public DbSet<Item>? Itens { get; set; }
+    public DbSet<Transacao>? Transacoes { get; set; }
 }
 

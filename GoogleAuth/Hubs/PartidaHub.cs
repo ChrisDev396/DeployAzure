@@ -1,14 +1,6 @@
-﻿using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Threading;
+﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json.Linq;
 
 [Authorize]
 public class PartidaHub : Hub
@@ -126,6 +118,7 @@ public class PartidaHub : Hub
             {
                 dictionary[roomName][0].itemStatus[0].vida -= dictionary[roomName][1].itemStatus[0].forca;
             }
+
             dictionary[roomName][0].turno = !dictionary[roomName][0].turno;
             dictionary[roomName][1].turno = !dictionary[roomName][1].turno;
 
@@ -166,9 +159,9 @@ public class PartidaHub : Hub
 
     }
 
-    public override async Task OnDisconnectedAsync(Exception exception)
-    {
+    //public override async Task OnDisconnectedAsync(Exception exception)
+    //{
 
-        await base.OnDisconnectedAsync(exception);
-    }
+    //    await base.OnDisconnectedAsync(exception);
+    //}
 }

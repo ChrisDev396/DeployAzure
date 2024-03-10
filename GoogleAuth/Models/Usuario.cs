@@ -4,27 +4,26 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 public class Usuario
 {
-    public Usuario()
-    {
-        Itens = new Collection<Item>();
-    }
-
     [Key]
-    //[DatabaseGenerated(DatabaseGeneratedOption.None)]
-    //[Required]
-    public int UsuarioId { get; set; }
+    [StringLength(10)]
+    public string? NomeUsuario { get; set; }
 
-    [Required]
-    //[StringLength(50)]
     public string? Email { get; set; }
 
-    [Required]
-    [StringLength(10)]
-    public string? Nome { get; set; }
     public DateTime DataCriacao { get; set; }
-    //public int Moedas { get; set; }
 
-    public ICollection<Item>? Itens { get; set; }
+    public int Partidas { get; set; }
+    public int Vitorias { get; set; }
+    public int Pontuacao { get; set; }
 }
+
+//public Usuario()
+//{
+//    Itens = new Collection<Item>();
+//    Transacoes = new Collection<Transacao>();
+//}
+
+//public ICollection<Item>? Itens { get; set; }
+//public ICollection<Transacao>? Transacoes { get; set; }
 
 

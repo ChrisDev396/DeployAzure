@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GoogleAuth.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240301045150_TransacaoMigration")]
+    partial class TransacaoMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,16 +27,20 @@ namespace GoogleAuth.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("NomeUsuario")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("Modelo")
-                        .HasColumnType("int");
+                    b.Property<string>("Shild")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
 
-                    b.Property<string>("ShildNome")
-                        .HasColumnType("longtext");
+                    b.Property<string>("UsuarioNomeUsuario")
+                        .HasColumnType("varchar(10)");
 
                     b.HasKey("ItemId");
+
+                    b.HasIndex("UsuarioNomeUsuario");
 
                     b.ToTable("Itens");
                 });
@@ -44,20 +51,23 @@ namespace GoogleAuth.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("longtext");
+                    b.Property<string>("Item")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
 
                     b.Property<string>("NomeTitular")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("longtext");
 
-                    b.Property<string>("ShildNome")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
+                    b.Property<string>("NomeUsuario")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UsuarioNomeUsuario")
+                        .HasColumnType("varchar(10)");
 
                     b.HasKey("TransacaoId");
+
+                    b.HasIndex("UsuarioNomeUsuario");
 
                     b.ToTable("Transacoes");
                 });
@@ -86,6 +96,31 @@ namespace GoogleAuth.Migrations
                     b.HasKey("NomeUsuario");
 
                     b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("Item", b =>
+                {
+                    b.HasOne("Usuario", "Usuario")
+                        .WithMany("Itens")
+                        .HasForeignKey("UsuarioNomeUsuario");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("Transacao", b =>
+                {
+                    b.HasOne("Usuario", "Usuario")
+                        .WithMany("Transacoes")
+                        .HasForeignKey("UsuarioNomeUsuario");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("Usuario", b =>
+                {
+                    b.Navigation("Itens");
+
+                    b.Navigation("Transacoes");
                 });
 #pragma warning restore 612, 618
         }

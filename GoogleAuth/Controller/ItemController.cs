@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("[controller]")]
-[Authorize]
+//[Authorize]
 public class ItemController : ControllerBase
 {
     private readonly AppDbContext _context;
@@ -24,10 +24,10 @@ public class ItemController : ControllerBase
         return item;
     }
 
-    [HttpGet("{id:int}", Name = "ObterItem")]
-    public ActionResult<Item> Get(int id)
+    [HttpGet("{id:alpha}", Name = "ObterItem")]
+    public ActionResult<Item> Get(string shild)
     {
-        var item = _context.Itens.FirstOrDefault(p => p.ItemId == id);
+        var item = _context.Itens.FirstOrDefault(p => p.ShildNome == shild);
         if (item is null)
         {
             return NotFound("Item não encontrado.");
@@ -45,7 +45,7 @@ public class ItemController : ControllerBase
         _context.Itens.Add(item);
         _context.SaveChanges();
         return new CreatedAtRouteResult("ObterItem",
-            new { id = item.UsuarioId }, item);
+            new { id = item.Email }, item);
     }
 
 }
