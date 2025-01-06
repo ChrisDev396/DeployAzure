@@ -14,7 +14,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         .AddJwtBearer(options =>
         {
             options.Authority = "https://accounts.google.com";
-            options.Audience = "117230218482-e4uksc774l6nfqkbo779r1b2k5j1kffd.apps.googleusercontent.com";
+            options.Audience = "token11111";
             //options.ValidateLifetime = true;
         });
 
